@@ -1,0 +1,78 @@
+body{
+    margin: 0px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+header{
+    background-color: #FFFFFF;
+    width: 100vw;
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+#joe-logo{
+    margin: 0px;
+    min-height: 75%;
+    height: 75%;
+    max-height: 75%;
+    position: relative;
+    left: 50px;
+
+}
+
+#article{
+    width: 50vw;
+    height: 80vh;
+    background-color: #dedede;
+    box-shadow: 20px 20px 0px -10px black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#article p{
+    margin: 50px;
+}
+
+#article h3{
+    text-decoration: underline pink 3px;
+}
+
+#menu{
+    width: 50%;
+    position: relative;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#menu a{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+#menu a:hover{
+    text-decoration: underline 2px;
+}
+
+#page-content{
+    background-color: pink;
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer{
+    background-color: lightgray;
+    width: 100vw;
+    height: 20vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
