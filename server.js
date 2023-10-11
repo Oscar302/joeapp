@@ -4,7 +4,7 @@ const path = require("path");
 
 const router = require("./router/router.js");
 
-const PORT = 4000;
+const PORT = 3000;
 const HOST = '127.0.0.1'
 
 app.use(express.static('public')); 
