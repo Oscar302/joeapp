@@ -7,7 +7,6 @@ Router.get("/", (req, res) => {
 
     res.send(users)
     
-
 })
 
 Router.get("/contact", (req, res) => {
