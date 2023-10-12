@@ -17,16 +17,9 @@ app.use(express.urlencoded({extended : true}));
 
 app.get("/", (req, res) => {
 
-    const useragent = req.useragent;
+    
+    res.sendFile(path.join(__dirname, 'public', 'index.html'))            
 
-    if(useragent.isMobile){
-        res.sendFile(path.join(__dirname, 'public', 'm.index.html'))
-    } else{
-        res.sendFile(path.join(__dirname, 'public', 'index.html'))
-    }
-
-            
-        
 })
 
 

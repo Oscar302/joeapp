@@ -2,6 +2,9 @@ const express = require("express");
 const Router = express.Router()
 const path = require('path')
 const users = require('../backend/users');
+const useragent = require('express-useragent');
+
+Router.use(useragent.express());; 
 
 Router.get("/", (req, res) => {
 
@@ -42,7 +45,17 @@ Router.get('/user', (req, res) => {
     } else {
         res.sendFile(path.join(__dirname, '../public/pages', 'signup.html'))
     }
+})
 
+
+Router.get('/phone', (req, res) => {
+    const useragent = req.useragent;
+
+    if(useragent.isMobile){
+        res.send("You are using a mobile device")
+    } else {
+        res.send("You are using a desktop device")
+    }
 })
 
 
