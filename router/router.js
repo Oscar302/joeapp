@@ -52,6 +52,7 @@ Router.get('/phone', (req, res) => {
     const useragent = req.useragent;
 
     if(useragent.isMobile){
+        
         res.sendFile(path.join(__dirname, '../public/pages', 'm.index.html'))
     } else {
         res.sendFile(path.join(__dirname, '../public', 'index.html'))
