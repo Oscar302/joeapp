@@ -52,9 +52,9 @@ Router.get('/phone', (req, res) => {
     const useragent = req.useragent;
 
     if(useragent.isMobile){
-        res.send("You are using a mobile device")
+        res.sendFile(path.join(__dirname, '../public', 'index.html'))
     } else {
-        res.send("You are using a desktop device")
+        res.sendFile(path.join(__dirname, '../public/pages', 'm.index.html'))
     }
 })
 
