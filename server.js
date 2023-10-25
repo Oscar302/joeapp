@@ -1,8 +1,6 @@
 const express = require('express');
 const app = express();
 const path = require("path");
-//husk npm install express-useragent
-const useragent = require('express-useragent');
 
 const router = require("./router/router.js");
 
