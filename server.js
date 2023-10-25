@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+
 const path = require("path");
 
 const router = require("./router/router.js");
@@ -8,8 +9,9 @@ const PORT = 3000;
 const HOST = '127.0.0.1'
 
 app.use(express.static('public'))
-app.use(useragent.express());; 
+
 app.use('/site', router);
+
 app.use(express.urlencoded({extended : true}));
 
 
