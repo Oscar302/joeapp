@@ -2,6 +2,10 @@ const express = require("express");
 const Router = express.Router()
 const path = require('path')
 const users = require('../backend/users');
+const { SendText } = require('../services/sms');
+const bodyParser = require('body-parser');
+
+Router.use(bodyParser.json());
 
 Router.get("/", (req, res) => {
 
@@ -44,11 +48,22 @@ Router.get('/user', (req, res) => {
     }
 })
 
-
 Router.get('/phone', (req, res) => {
     
         res.sendFile(path.join(__dirname, '../public', 'index.html'))
 })
 
+Router.post('/service/sendText', (req, res) => {
+
+    text = req.body.message;
+    number = req.body.number;
+
+    try{
+        SendText(text, number);
+        res.send({msg : 'Message sent', msgSent : text})
+    } catch(err){
+        res.send({msg : 'Message failed to send', err : err.message})
+    }
+})
 
 module.exports = Router;
