@@ -1,10 +1,18 @@
+:root{
+    --color-primary: #FFC0CB;
+    --color-secondary: #FFFFFF;
+    --color-tertiary: #000000;
+    --color-quaternary: #ededed;
+}
+
+
 body{
     margin: 0px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 header{
-    background-color: #FFFFFF;
+    background-color: var(--color-secondary);
     width: 100vw;
     height: 10vh;
     display: flex;
@@ -75,4 +83,79 @@ footer{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+}
+
+@media (max-width: 600px) {
+    
+    #article{
+        width: 90vw;
+        height: 80vh;
+        background-color: #dedede;
+        box-shadow: 20px 20px 0px -10px black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    header{
+        width: 100vw;
+        height: 25vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #joe-logo{
+        margin: 0px;
+        height:5px;
+        position: relative;
+        left: 0px;
+    }
+
+    #article p{
+        margin: 50px;
+    }
+
+    #article h3{
+        text-decoration: underline pink 3px;
+    }
+
+    #menu{
+        width: 100%;
+        position: relative;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    #menu a{
+        font-size: small;
+        text-decoration: none;
+        color: black;
+        cursor: pointer;
+    }
+
+    #menu a:hover{
+        text-decoration: underline 2px;
+    }
+
+    #page-content{
+        margin-top: 10px;
+        background-color: pink;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    footer{
+        background-color: lightgray;
+        width: 100vw;
+        height: 20vh;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+
+
 }
