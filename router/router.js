@@ -58,12 +58,16 @@ Router.post('/service/sendText', (req, res) => {
     text = req.body.message;
     number = req.body.number;
 
+    number = number.replace(/\s/g, '');
+
+    res.send({msgSent : number})
+    /*
     try{
         SendText(text, number);
         res.send({msg : 'Message sent', msgSent : text})
     } catch(err){
         res.send({msg : 'Message failed to send', err : err.message})
-    }
+    }*/
 })
 
 module.exports = Router;
