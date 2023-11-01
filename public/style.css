@@ -100,14 +100,16 @@ footer{
 
     header{
         width: 100vw;
-        height: 25vh;
+        height:15vh;
         display: flex;
+        justify-content: space-evenly;
         flex-direction: column;
     }
 
     #joe-logo{
         margin: 0px;
-        height:5px;
+        height: 50%;
+        min-height: 50%;
         position: relative;
         left: 0px;
     }
