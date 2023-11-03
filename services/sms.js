@@ -1,8 +1,10 @@
 
+// importerer twilio config filen
+const twilioDetail = require('../config/config.js').twilioDetail;
 
-// Twilio oplysninger fra min (ottos bruger)
-const accountSid = 'ACc51e52fb55e9f546269424e7756bdaf9';
-const authToken = 'abf8956e0b040a230e8621413741aa4d';
+// sætter twilio oplysninger i variabler
+const accountSid = twilioDetail.accountSid;
+const authToken = twilioDetail.authToken;
 
 // opsætter twilio client
 const client = require('twilio')(accountSid, authToken);
