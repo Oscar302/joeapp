@@ -1,18 +1,39 @@
-// funktionen tager teksten fra username, password og email og gemmer det i localstorage (kan sagtens tilføje dem alle)
-// grundet "require" i HTML, kan man ikke oprette sig uden at opfylde de felter hvortil require er brugt
-function createUser() {
-    const username = document.getElementById('username-sign-up').value;
-    const password = document.getElementById('password-sign-up').value;
-    const email = document.getElementById('email-sign-up').value;
+/* 
+fetch('/signup', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ username, password, email }),
+  })
+    .then((response) => response.text())
+    .then((result) => {
+      alert(result);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+} 
+*/
+function kookie () {
+const username = document.getElementById('username-sign-up').value;
+const password = document.getElementById('password-sign-up').value;
+const email = document.getElementById('email-sign-up').value;
 
-    
-    const user = {
-        username: username,
-        password: password,
-        email: email
-    };
+if (username != "" && password != "" && email != "") {
+    document.cookie = "username=" + username;
+    document.cookie = "password=" + password;
+    document.cookie = "email=" + email;
+    alert("Cookies are set");
+} else {
+    alert("Please fill out the form");
+}
+}
+kookie();
 
+// kryptering af cookie data?
+
+    /* Hvis vi også vil rode med LocalStorage   
     const userJSON = JSON.stringify(user);
     localStorage.setItem('user', userJSON);
-
-} 
+    */
