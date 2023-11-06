@@ -15,6 +15,11 @@ fetch('/signup', {
     });
 } 
 */
+
+document.querySelectorAll("input").forEach((item) => {
+
+})
+
 function kookie () {
 const username = document.getElementById('username-sign-up').value;
 const password = document.getElementById('password-sign-up').value;
@@ -29,7 +34,7 @@ if (username != "" && password != "" && email != "") {
     alert("Please fill out the form");
 }
 }
-kookie();
+//kookie();
 
 // kryptering af cookie data?
 
