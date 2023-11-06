@@ -11,7 +11,7 @@ function getActiveUser(){
     }
 
 }
-getActiveUser()
+getActiveUser();
 
 
 

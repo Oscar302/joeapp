@@ -1,5 +1,39 @@
+/* 
+fetch('/signup', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ username, password, email }),
+  })
+    .then((response) => response.text())
+    .then((result) => {
+      alert(result);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+} 
+*/
+function kookie () {
+const username = document.getElementById('username-sign-up').value;
+const password = document.getElementById('password-sign-up').value;
+const email = document.getElementById('email-sign-up').value;
 
-const user = {firstname: "John", lastname : "Doe", email : "joedoe@gmail.com", password : "kodeord", age : 21, phone : 11112222, address : "Solbjerg Plads 12", city : "Frederiksberg", zip : 2000, country : "Denmark"};
+if (username != "" && password != "" && email != "") {
+    document.cookie = "username=" + username;
+    document.cookie = "password=" + password;
+    document.cookie = "email=" + email;
+    alert("Cookies are set");
+} else {
+    alert("Please fill out the form");
+}
+}
+kookie();
 
+// kryptering af cookie data?
 
-
+    /* Hvis vi også vil rode med LocalStorage   
+    const userJSON = JSON.stringify(user);
+    localStorage.setItem('user', userJSON);
+    */
