@@ -57,7 +57,7 @@ header{
     justify-content: space-evenly;
 }
 
-#menu a{
+/*#menu a{
     text-decoration: none;
     color: black;
     cursor: pointer;
@@ -65,7 +65,36 @@ header{
 
 #menu a:hover{
     text-decoration: underline 2px;
-}
+}*/
+
+#menu a{
+    outline: none;
+    font-size: larger;
+    color: black;
+    text-decoration: none;
+    border-bottom: 2px solid transparent; /* Set an initial transparent bottom border */
+    transition: width 0.3s ease; /* Add a transition effect for smooth animation */
+    position: relative; /* Ensure proper stacking context for the pseudo-element */
+  }
+  
+#menu a::before {
+    content: ''; 
+    position: absolute;
+    bottom: 0; 
+    left: 0; 
+    width: 0; 
+    height: 2px;
+    background-color: black; 
+    transition: width 0.3s ease; 
+  }
+  
+#menu a:hover::before {
+    width: 100%;
+  }
+
+  #menu a:focus::before {
+    width: 100%;
+  }
 
 #page-content{
     background-color: pink;
@@ -160,4 +189,17 @@ footer{
     }
 
 
+}
+
+.hidden{
+    display: none;
+    translate: -100% -10vh;
+}
+
+.show{
+    position: fixed;
+    transform: translate(100%, 0px); 
+    width: 20vw;
+    height: 100%;
+    background-color: blue;
 }
