@@ -6,6 +6,8 @@ const twilioDetail = {
   authToken: "abf8956e0b040a230e8621413741aa4d",
 };
 
+const products = [{id : 1, name : "Joes Club", price : 65}, {id : 2, name : "Joes Avocado", price : 55}]
+
 const user = {
   firstname: "John",
   lastname: "Doe",
@@ -20,4 +22,4 @@ const user = {
   country: "Denmark",
 };
 
-module.exports = { twilioDetail, user };
+module.exports = { twilioDetail, user, products};
