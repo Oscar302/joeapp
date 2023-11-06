@@ -12,7 +12,7 @@ const HOST = "127.0.0.1";
 
 
 // Importerer sqlite3
-const sqlite3 = require("sqlite3").verbose();
+/*const sqlite3 = require("sqlite3").verbose();
 
 // Opretter database
 const db = new sqlite3.Database("./db/db.sqlite");
@@ -23,7 +23,7 @@ db.serialize(function () {
   db.run(
     "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, firstname TEXT, lastname TEXT, email TEXT, password TEXT, age INTEGER, phone INTEGER, address TEXT, city TEXT, zip INTEGER, country TEXT)"
   );
-});
+});*/
 
 // Sætter public folderen som statisk (ikke ejs filer)
 app.use(express.static("public"));
