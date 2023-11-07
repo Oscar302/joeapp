@@ -23,11 +23,22 @@
     </header>
     <!--Indholdet skal holdes inden i div'en nedenfor-->
     <div id="page-content">
-        <ul id="list-of-products">
-            <li id="name"><%= product.name %></li>
-            <li id="price"><%= product.price %> DKK</li>
-        </ul>
-        <img src="">
+        <div id="article">
+            <div>
+                <ul id="list-of-products">
+                    <li id="name">
+                        <h2><%= product.name %></h2>
+                    </li>
+                    <li id="price"><%= product.price %> DKK</li>
+                    <li>
+                        <p id="product-desc"><%= product.desc %></p>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <img id="product-img" src=<%= product.img %> loading="lazy">
+            </div>
+        </div>
     </div>
     <!--Indholdet skal holdes inden i div'en ovenfor (page-content)-->
     <footer></footer>
