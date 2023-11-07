@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Joe & And The Juice</title>
     <link rel="stylesheet" type="text/css" href="../style.css" />
+    <link rel="stylesheet" href="../../stylesheets/menu.css">
     <link
       rel="icon"
       href="https://play-lh.googleusercontent.com/7rrLQZ1babW5YVAeWigNtVeJYtwqH1hzHosdZj1P-bpDGcmg6UKyHEawJ9tIu-3PewHe"
@@ -26,15 +27,17 @@
       </div>
     </header>
     <div id="page-content">
-      <div id="article">
+      <div id="article" class="list-of-products">
         <h3>Joe's Menu</h3>
-        <% products.forEach(function(item) { %>
-        <a href="/site/product/<%= item.id %>">
-          <li class="products">
-            <%= item.name + " Price: " + item.price + " DKK" %>
-          </li>
-        </a>
-        <% }); %>
+        <ul>
+            <% products.forEach(function(item) { %>
+            <a href="/site/product/<%= item.id %>">
+            <li class="products">
+                <%= item.name + " Price: " + item.price + " DKK" %>
+            </li>
+            </a>
+            <% }); %>
+        </ul>
       </div>
     </div>
     <footer>
@@ -43,5 +46,4 @@
     </footer>
   </body>
   <script src="../script.js"></script>
-  <script src="../scripts/project.js"></script>
 </html>

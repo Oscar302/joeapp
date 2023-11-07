@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Missing Title</title>
     <link rel="stylesheet" type="text/css" href="../../style.css">
+    <link rel="stylesheet" href="../../stylesheets/product.css">
     <link rel="icon" href="https://play-lh.googleusercontent.com/7rrLQZ1babW5YVAeWigNtVeJYtwqH1hzHosdZj1P-bpDGcmg6UKyHEawJ9tIu-3PewHe">
 </head>
 <body>
@@ -16,12 +17,14 @@
             <a id="menu-menu" href="/site/menu">Menu</a>
             <a id="menu-about" href="/site/about">About</a>
             <a id="menu-contact" href="/site/contact">Contact</a>
+            <a id="account" href="/site/login">account</a>    
+            <a id="log-in" href="/site/login">Log In</a>
             <a id="log-in" href="/site/user">Sign Up</a>
         </div>
     </header>
     <!--Indholdet skal holdes inden i div'en nedenfor-->
     <div id="page-content">
-        <ul>
+        <ul id="list-of-products">
             <li id="name"><%= product.name %></li>
             <li id="price"><%= product.price %> DKK</li>
         </ul>

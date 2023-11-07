@@ -6,7 +6,7 @@ const twilioDetail = {
   authToken: "abf8956e0b040a230e8621413741aa4d",
 };
 
-const products = [{id : 1, name : "Joes Club", price : 65}, {id : 2, name : "Joes Avocado", price : 55}]
+const products = [{id : 1, name : "Joes Club", price : 65}, {id : 2, name : "Joes Avocado", price : 55}, {id : 3, name : "Powershake", price : 45}]
 
 const user = {
   firstname: "John",
