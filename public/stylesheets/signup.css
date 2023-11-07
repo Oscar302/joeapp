@@ -1,18 +1,4 @@
 
-
-#page-content div{
-    width: 50%;
-    height: 90%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    row-gap: 10px;
-    align-items: center;  
-    background-color: #dedede;
-    padding: 0px 10% 0px 10%;
-    box-shadow: 20px 20px 0px -10px black;
-} 
-
 #page-content div p{
     line-height: 1.5;
 }

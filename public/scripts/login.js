@@ -21,7 +21,7 @@ const user = {
 
 console.log("login.js loaded");
 
-function login() {
+async function login () {
   //get the values from the input fields
   const username = document.getElementById("username-log-in").value;
   const password = document.getElementById("password-log-in").value;
@@ -33,6 +33,7 @@ function login() {
   //check if the values are correct
   if (username === user.username && password === user.password) {
     //if they are, then redirect to the home page
+    await localStorage.setItem("user", JSON.stringify(user));
     console.log("login.js redirecting to index.html");
     window.location.href = "../index.html";
   } else {
@@ -43,11 +44,9 @@ function login() {
 
 //save user in local storage
 
-localStorage.setItem("user", JSON.stringify(user));
-
 //add an event listener to the login button
 
-document.getElementById("login").addEventListener("click", function(event) {
+document.getElementById("loginButton").addEventListener("click", function(event) {
     event.preventDefault(); // prevent the form from submitting
     login();
   });
@@ -59,7 +58,28 @@ function signout() {
     localStorage.removeItem("user");
   }
 
-  document.getElementById("signout").addEventListener("click", function(event) {
-    event.preventDefault(); // prevent the form from submitting
-    signout();
-  });
+  document.getElementById("signout").addEventListener("click", signout);
+
+  function CheckLogin(){
+
+    const loginButton = document.getElementById("loginButton");
+    const signoutButton = document.getElementById("signout");
+
+    const usernameInput = document.getElementById("username-log-in");
+    const passwordInput = document.getElementById("password-log-in");
+
+    const headerSignout = document.getElementById("login");
+
+    let user = localStorage.getItem("user");
+
+    console.log(user)
+
+    if(user != null){
+      loginButton.style.display = "none";
+      usernameInput.style.display = "none";
+      passwordInput.style.display = "none";     
+    } else {
+      signoutButton.style.display = "none";
+    }
+  }
+  CheckLogin();
