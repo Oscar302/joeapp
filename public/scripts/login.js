@@ -43,11 +43,23 @@ function login() {
 
 //save user in local storage
 
-//localStorage.setItem("user", JSON.stringify(user));
+localStorage.setItem("user", JSON.stringify(user));
 
 //add an event listener to the login button
 
 document.getElementById("login").addEventListener("click", function(event) {
     event.preventDefault(); // prevent the form from submitting
     login();
+  });
+
+//make signout function
+
+function signout() {
+    //remove the user from local storage
+    localStorage.removeItem("user");
+  }
+
+  document.getElementById("signout").addEventListener("click", function(event) {
+    event.preventDefault(); // prevent the form from submitting
+    signout();
   });
