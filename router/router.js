@@ -1,7 +1,7 @@
 const express = require("express");
 const Router = express.Router();
 const path = require("path");
-const users = require("../backend/users");
+const users = require("../config/config").user;
 const { SendText } = require("../services/sms");
 const bodyParser = require("body-parser");
 
@@ -29,14 +29,10 @@ Router.get("/project", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/pages", "project.html"));
 });
 
-Router.get("/user", (req, res) => {
-  userstatus = req.query.loggedOn;
+Router.get("/users", (req, res) => {
+  
+  res.send(users);
 
-  if (userstatus === "true") {
-    res.sendFile(path.join(__dirname, "../public/pages", "user.html"));
-  } else {
-    res.sendFile(path.join(__dirname, "../public/pages", "signup.html"));
-  }
 });
 
 Router.get("/phone", (req, res) => {

@@ -68,6 +68,8 @@ function signout() {
     const usernameInput = document.getElementById("username-log-in");
     const passwordInput = document.getElementById("password-log-in");
 
+    const para = document.getElementById("para-on-login");
+
     const headerSignout = document.getElementById("login");
 
     let user = localStorage.getItem("user");
@@ -75,10 +77,12 @@ function signout() {
     console.log(user)
 
     if(user != null){
+      //hvis bruger ikke findes
       loginButton.style.display = "none";
       usernameInput.style.display = "none";
       passwordInput.style.display = "none";     
     } else {
+      //hvis bruger findes
       signoutButton.style.display = "none";
     }
   }

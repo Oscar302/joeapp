@@ -13,20 +13,6 @@ const products = require("./config/config").products;
 const PORT = 3000;
 const HOST = "127.0.0.1";
 
-// Importerer sqlite3
-/*const sqlite3 = require("sqlite3").verbose();
-
-// Opretter database
-const db = new sqlite3.Database("./db/db.sqlite");
-
-//Nedstående funktiok kan køre SQL statements
-db.serialize(function () {
-  // Tabellen indeholder primærnøgle id, url, tidspunkt og caption
-  db.run(
-    "CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, firstname TEXT, lastname TEXT, email TEXT, password TEXT, age INTEGER, phone INTEGER, address TEXT, city TEXT, zip INTEGER, country TEXT)"
-  );
-});*/
-
 //EJS Filer (sider der kan ændre indholdet, alt efter hvad de loades på, f.eks. en profilside eller produktside)
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/public/pages/views'));
