@@ -18,6 +18,7 @@ async function ChatGPTRequest(message){
             }
         ) 
     })
+    .catch(err => console.log(err))
     .then(res => res.json())
     try{reply = request.choices[0].message.content
         console.log(reply);
@@ -25,6 +26,7 @@ async function ChatGPTRequest(message){
     }
     catch(err){
         console.log(request)
+        reply = request.error.message
     }
 }
 

@@ -39,11 +39,11 @@ app.use((req, res) => {
 });
 
 io.on("connection", socket => {
+  console.log(socket.id)
 
   socket.on("question", async question => {
 
     let reply = await ChatGPTRequest(question);
-
     socket.emit("reply", reply)
 
   })
