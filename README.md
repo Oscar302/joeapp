@@ -6,3 +6,4 @@ Resultatet bør være 'Server is now running on 3000' i konsollen
 
 Herfra kan du tilgå fra din browser addressen: http://localhost:3000
 
+npm install dotenv

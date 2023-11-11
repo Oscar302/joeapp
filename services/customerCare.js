@@ -1,4 +1,6 @@
-const API_KEY = "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";
+require('dotenv').config();
+const API_KEY = process.env.OPENAI_API_KEY;
+console.log(openaiApiKey)
 
 async function ChatGPTRequest(message){
     
