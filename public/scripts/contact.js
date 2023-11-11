@@ -11,6 +11,10 @@ socket.on("connect", () => {
 
     socket.on("reply", (reply) => {
 
+        if(reply == undefined){
+            return
+        }
+
         li_r = document.createElement("li")
         li_r.classList.add("replies")
         li_r.innerHTML = reply
