@@ -19,12 +19,13 @@ async function ChatGPTRequest(message){
         ) 
     })
     .then(res => res.json())
-
-    reply = request.choices[0].message.content 
-    console.log(reply);
-
-    return reply
-    
+    try{reply = request.choices[0].message.content
+        console.log(reply);
+        return reply
+    }
+    catch(err){
+        console.log(request)
+    }
 }
 
 module.exports = {ChatGPTRequest};    // Exporterer funktionen så den kan bruges i andre filer
