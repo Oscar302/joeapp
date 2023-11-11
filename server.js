@@ -3,6 +3,12 @@ const express = require("express");
 const app = express();
 const path = require("path");
 
+const {ChatGPTRequest} = require("./services/customerCare.js");
+
+//sockets
+const server = require('http').createServer(app)
+const io = require('socket.io')(server, { cors: { origin: '*' }})
+
 // Importerer router filen
 const router = require("./router/router.js");
 
@@ -23,8 +29,6 @@ app.use("/site", router);
 
 app.use(express.urlencoded({ extended: true }));
 
-
-
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
@@ -34,6 +38,18 @@ app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname, "public/pages", "404.html"));
 });
 
-app.listen(PORT, HOST, () => {
+io.on("connection", socket => {
+
+  socket.on("question", async question => {
+
+    let reply = await ChatGPTRequest(question);
+
+    socket.emit("reply", reply)
+
+  })
+
+})
+
+server.listen(PORT, HOST, () => {
   console.log(`Server is now running on port ${PORT}`);
 });

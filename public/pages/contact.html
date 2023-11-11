@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="../style.css">
     <link rel="icon" href="https://play-lh.googleusercontent.com/7rrLQZ1babW5YVAeWigNtVeJYtwqH1hzHosdZj1P-bpDGcmg6UKyHEawJ9tIu-3PewHe">
     <link rel="stylesheet" href="../stylesheets/contact.css">
+    <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
 </head>
 <body>
     <header>
@@ -23,16 +24,16 @@
     <div id="page-content">
         <div id="article">
             <h3>Contact – Joe and The Juice</h3>
-            <p>
-                Write to us!
-            </p>
-            <div id="sms-text-container">
-                <label for="sms-content" >Message</label>
-                <input type="text" placeholder="Message" required id="sms-message">
-                <label for="sms-number">TLF:</label>
-                <input type="text" placeholder="Number" required value="+45" id="sms-number">
-                <button type="submit" id="sms-btn">Send Message</button>
-                <p><span id="message-response"></span></p>
+            <div id="chat-container">
+                <ul id="chat">
+                    <li id="intro">How can I help you today?</li>
+                </ul>
+                <div id="input-container">
+                    <input id="questions" placeholder="Ask me anything" type="text" value="">
+                    <button id="sendButton">
+                        <img id="send-icon" src="https://cdn-icons-png.flaticon.com/512/109/109618.png">
+                    </button>
+                </div>
             </div>
         </div>
     </div>

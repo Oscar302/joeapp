@@ -1,32 +1,36 @@
 
-document.getElementById("sms-btn").addEventListener("click", async (e) => {
-    // prevent the default behavior of the form
-    e.preventDefault();
+const socket = io('http://localhost:3000')
+const chat = document.getElementById("chat");
 
-    let message = document.getElementById("sms-message").value;
-    let number = document.getElementById("sms-number").value;
-    let span = document.getElementById("message-response")
+const sendButton = document.getElementById("sendButton");
 
-    let data = {
-        message,
-        number
-    }
+socket.on("connect", () => {
 
-    let request = await fetch("/site/service/sendText", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data),
+    console.log("connected to server")  
+
+    socket.on("reply", (reply) => {
+
+        li_r = document.createElement("li")
+        li_r.classList.add("replies")
+        li_r.innerHTML = reply
+        chat.appendChild(li_r)
     })
-    .then(res => res.json())
-    
-    try{
-        span.innerHTML = request.msgSent
-    }catch(err){
-        console.log(err)
-        span.innerHTML = "Failed"
+})
+
+sendButton.addEventListener("click", () => {
+
+    let question = document.getElementById("questions").value
+
+    if(question == ""){
+        return
     }
 
+    socket.emit("question", question)
 
+    li_q = document.createElement("li")
+    li_q.classList.add("question")
+    li_q.innerHTML = question
+    
+    chat.appendChild(li_q)
+    document.getElementById("questions").value = "";
 })
