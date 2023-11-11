@@ -1,7 +1,5 @@
 require('dotenv').config();
 const API_KEY = process.env.OPENAI_API_KEY;
-console.log(openaiApiKey)
-
 async function ChatGPTRequest(message){
     
     console.log("Request started")
