@@ -3,7 +3,8 @@
 //import { user } from "../../config/config.js";
 
 //user object
-const user = {
+const customers = [
+  {
     firstname: "John",
     lastname: "Doe",
     username: "JohnDoe", 
@@ -15,21 +16,51 @@ const user = {
     city: "Frederiksberg",
     zip: 2000,
     country: "Denmark",
-  };
+    },
+    ];
 
 //make a login function
 
 console.log("login.js loaded");
 
-async function login () {
-  //get the values from the input fields
+async function login() {
+  // Get the values from the input fields
   const username = document.getElementById("username-log-in").value;
   const password = document.getElementById("password-log-in").value;
-  //tjekker om der er skrevet noget i email og password
+
+  // Check if username and password are provided
+  if (username && password) {
+    const customer = customers.find(
+      (user) => user.username === username && user.password === password
+    );
+
+    if (customer) {
+      // Set a cookie or store the user information locally for client-side authentication
+      document.cookie = `userAuth=${username}; max-age=3600`; // 1 hour expiration
+      alert("Du er blevet logget ind");
+      window.location.href = "../index.html";
+      // Redirect to another page or perform further actions
+    } else {
+      alert("Forkert brugernavn eller adgangskode");
+    }
+  } else {
+    alert("Indtast brugernavn og adgangskode");
+  }
+}
+
+
+// Ovenstående kode fungerer, men når man bliver redirected til index.html forsvinder cokies. Det skal fixes.
+
+
+
+
+// nedenunder er "den gamle kode" med Localhost
+  /*
   if (username.trim() === "" || password.trim() === "") {
     alert("Please fill in all fields");
     return;
   }
+  
   //check if the values are correct
   if (username === user.username && password === user.password) {
     //if they are, then redirect to the home page
@@ -41,6 +72,7 @@ async function login () {
     alert("Wrong email or password");
   }
 }
+*/
 
 //save user in local storage
 

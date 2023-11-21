@@ -1,21 +1,3 @@
-/* 
-fetch('/signup', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ username, password, email }),
-  })
-    .then((response) => response.text())
-    .then((result) => {
-      alert(result);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-} 
-*/
-
 document.querySelectorAll("input").forEach((item) => {
 
 })
@@ -25,20 +7,21 @@ const username = document.getElementById('username-sign-up').value;
 const password = document.getElementById('password-sign-up').value;
 const email = document.getElementById('email-sign-up').value;
 
-if (username != "" && password != "" && email != "") {
-    document.cookie = "username=" + username;
-    document.cookie = "password=" + password;
-    document.cookie = "email=" + email;
+if (username !== "" && password !== "" && email !== "") {
+    // Set cookies with an expiration date in the future
+    var expirationDate = new Date();
+    expirationDate.setFullYear(expirationDate.getFullYear() + 1); // Set expiration for 1 year from now
+
+    document.cookie = `userAuth=${username}; max-age=3600
+    document.cookie = "password=" + password + "; expires=" + expirationDate.toUTCString() + "; path=/";
+    document.cookie = "email=" + email + "; expires=" + expirationDate.toUTCString() + "; path=/";
+
+    
+
     alert("Cookies are set");
+    window.location.href = "user.html";
+
 } else {
     alert("Please fill out the form");
-}
-}
-//kookie();
-
-// kryptering af cookie data?
-
-    /* Hvis vi også vil rode med LocalStorage   
-    const userJSON = JSON.stringify(user);
-    localStorage.setItem('user', userJSON);
-    */
+} 
+} 
