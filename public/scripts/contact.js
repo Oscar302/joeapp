@@ -1,6 +1,5 @@
-//const socket = io("http://localhost:3000")
-
-const socket = io('http://157.245.78.214/')
+const socket = io("http://localhost:3000")
+//const socket = io('http://157.245.78.214/')
 const chat = document.getElementById("chat");
 
 const sendButton = document.getElementById("sendButton");
