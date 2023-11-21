@@ -8,7 +8,9 @@ socket.on("connect", () => {
 
     console.log("connected to server")  
 
-    socket.on("reply", (reply) => {
+    socket.on("reply", async (reply) => {
+
+        await reply;
 
         if(reply == undefined){
             return
