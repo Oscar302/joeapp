@@ -23,14 +23,14 @@ const transporter = nodemailer.createTransport({
 // Øvelse 1: Send en mail til dig selv med nodemailer via Gmail
 // Se ovenstående under auth for oprettelse af Gmail-konto
 
-async function mailToUser(htmlMsg) {
+async function mailToUser(htmlMsg, recieverMail, name) {
   // send mail with defined transport object
   // SMTP transport: https://nodemailer.com/smtp/
   const info = await transporter.sendMail({
     // Message configuration: https://nodemailer.com/message/
     from: "Joe & The Juice <joeanthejuice2023@gmail.com>", // sender address
-    to: "philiptnorgaard@gmail.com", // list of reciever addresses
-    subject: "Velkommen til Joe & The Juice [Name]", // subject line
+    to: recieverMail, // list of reciever addresses
+    subject: `Velkommen til Joe & The Juice ${name}`, // subject line
     text: "hejj! Velkommen til Joe appen, dette er en test", // plain text body
     html: htmlMsg, // html body
   });
@@ -44,3 +44,8 @@ async function mailToUser(htmlMsg) {
 // to, subject, text og html
 
 mailToUser("Hvaaa sååå broder").catch(console.error);
+
+//eksporter funktionen mailToUser
+module.exports = {
+  mailToUser,
+};
