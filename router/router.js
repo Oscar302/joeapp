@@ -6,6 +6,7 @@ const { SendText } = require("../services/sms");
 const bodyParser = require("body-parser");
 
 const products = require("../config/config").products;
+const emailService = require("../services/mail.js");
 
 Router.use(bodyParser.json());
 
@@ -34,6 +35,11 @@ Router.get("/users", (req, res) => {
   res.send(users);
 
 });
+
+Router.get("/signup", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/pages", "signup.html"));
+});
+
 
 Router.get("/phone", (req, res) => {
   res.sendFile(path.join(__dirname, "../public", "index.html"));
@@ -68,5 +74,24 @@ Router.post("/service/sendText", (req, res) => {
         res.send({msg : 'Message failed to send', err : err.message})
     }
 });
+
+// New route for sending emails
+// sendEmail route
+Router.post("/service/sendEmail", async (req, res) => {
+  const { htmlMsg, recieverMail, name } = req.body;
+
+  try {
+      const emailInfo = await emailService.mailToUser(htmlMsg, recieverMail, name);
+      res.send({ msg: 'Email sent successfully', emailInfo });
+  } catch (error) {
+      console.error('Error sending email:', error);
+      res.status(500).send({ msg: 'Internal Server Error', error: error.message });
+  }
+});
+
+
+
+
+
 
 module.exports = Router;

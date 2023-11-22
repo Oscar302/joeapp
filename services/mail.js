@@ -24,20 +24,25 @@ const transporter = nodemailer.createTransport({
 // Se ovenstående under auth for oprettelse af Gmail-konto
 
 async function mailToUser(htmlMsg, recieverMail, name) {
-  // send mail with defined transport object
-  // SMTP transport: https://nodemailer.com/smtp/
-  const info = await transporter.sendMail({
-    // Message configuration: https://nodemailer.com/message/
-    from: "Joe & The Juice <joeanthejuice2023@gmail.com>", // sender address
-    to: recieverMail, // list of reciever addresses
-    subject: `Velkommen til Joe & The Juice ${name}`, // subject line
-    text: "hejj! Velkommen til Joe appen, dette er en test", // plain text body
-    html: htmlMsg, // html body
-  });
+  try {
+    // send mail with defined transport object
+    // SMTP transport: https://nodemailer.com/smtp/
+    const info = await transporter.sendMail({
+      // Message configuration: https://nodemailer.com/message/
+      from: "Joe & The Juice <joeanthejuice2023@gmail.com>", // sender address
+      to: recieverMail, // list of receiver addresses
+      subject: `Velkommen til Joe & The Juice ${name}`, // subject line
+      text: "Hej!", // plain text body
+      html: htmlMsg, // html body
+    });
 
-  console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+    console.log("Message sent: %s");
+    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com
+  } catch (error) {
+    console.error('Error sending email i fil mail.js:', error);
+  }
 }
+
 
 // Øvelse 2: Kald funktionen mailToUser med parametre og opdater funktionen mailToUser
 //så den tager imod parametre
