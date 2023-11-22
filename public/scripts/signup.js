@@ -12,7 +12,7 @@ if (username !== "" && password !== "" && email !== "") {
     var expirationDate = new Date();
     expirationDate.setFullYear(expirationDate.getFullYear() + 1); // Set expiration for 1 year from now
 
-    document.cookie = `userAuth=${username}; max-age=3600
+    document.cookie = `userAuth=${username}; max-age=3600`
     document.cookie = "password=" + password + "; expires=" + expirationDate.toUTCString() + "; path=/";
     document.cookie = "email=" + email + "; expires=" + expirationDate.toUTCString() + "; path=/";
 
