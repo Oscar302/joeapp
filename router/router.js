@@ -31,15 +31,12 @@ Router.get("/project", (req, res) => {
 });
 
 Router.get("/users", (req, res) => {
-  
   res.send(users);
-
 });
 
 Router.get("/signup", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/pages", "signup.html"));
 });
-
 
 Router.get("/phone", (req, res) => {
   res.sendFile(path.join(__dirname, "../public", "index.html"));
@@ -47,18 +44,14 @@ Router.get("/phone", (req, res) => {
 
 //EJS, routes
 Router.get("/menu", (req, res) => {
-  res.render('menu', {products : products});  
+  res.render("menu", { products: products });
 });
 
-
-Router.get('/product/:id', (req, res) => {
-
+Router.get("/product/:id", (req, res) => {
   const productId = req.params.id - 1;
 
-    res.render('product', {product : products[productId]})
-  
-})  
-
+  res.render("product", { product: products[productId] });
+});
 
 Router.post("/service/sendText", (req, res) => {
   text = req.body.message;
@@ -67,12 +60,12 @@ Router.post("/service/sendText", (req, res) => {
   number = number.replace(/\s/g, "");
 
   res.send({ msgSent: number });
-    try{
-        SendText(text, number);
-        res.send({msg : 'Message sent', msgSent : text})
-    } catch(err){
-        res.send({msg : 'Message failed to send', err : err.message})
-    }
+  try {
+    SendText(text, number);
+    res.send({ msg: "Message sent", msgSent: text });
+  } catch (err) {
+    res.send({ msg: "Message failed to send", err: err.message });
+  }
 });
 
 // New route for sending emails
@@ -81,17 +74,18 @@ Router.post("/service/sendEmail", async (req, res) => {
   const { htmlMsg, recieverMail, name } = req.body;
 
   try {
-      const emailInfo = await emailService.mailToUser(htmlMsg, recieverMail, name);
-      res.send({ msg: 'Email sent successfully', emailInfo });
+    const emailInfo = await emailService.mailToUser(
+      htmlMsg,
+      recieverMail,
+      name
+    );
+    res.send({ msg: "Email sent successfully", emailInfo });
   } catch (error) {
-      console.error('Error sending email:', error);
-      res.status(500).send({ msg: 'Internal Server Error', error: error.message });
+    console.error("Error sending email:", error);
+    res
+      .status(500)
+      .send({ msg: "Internal Server Error", error: error.message });
   }
 });
-
-
-
-
-
 
 module.exports = Router;

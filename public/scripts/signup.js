@@ -11,11 +11,23 @@ async function kookie() {
     expirationDate.setFullYear(expirationDate.getFullYear() + 1); // Set expiration for 1 year from now
 
     document.cookie =
-      "username=" + username + "; expires=" + expirationDate.toUTCString() + "; path=/";
+      "username=" +
+      username +
+      "; expires=" +
+      expirationDate.toUTCString() +
+      "; path=/";
     document.cookie =
-      "password=" + password + "; expires=" + expirationDate.toUTCString() + "; path=/";
+      "password=" +
+      password +
+      "; expires=" +
+      expirationDate.toUTCString() +
+      "; path=/";
     document.cookie =
-      "email=" + email + "; expires=" + expirationDate.toUTCString() + "; path=/";
+      "email=" +
+      email +
+      "; expires=" +
+      expirationDate.toUTCString() +
+      "; path=/";
 
     alert("Cookies are set");
     window.location.href = "user.html";
@@ -28,7 +40,7 @@ async function kookie() {
 
     // Make an HTTP request to send the email
     try {
-      const response = await fetch("/service/sendEmail", {
+      const response = await fetch("/site/service/sendEmail", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -40,15 +52,16 @@ async function kookie() {
         alert("Email sent successfully");
         window.location.href = "user.html";
       } else {
-        alert("Failed to send email");
+        //alert("Failed to send email");
         console.error("Error sending email in signup.js:", error);
         console.log("Error sending email in signup.js:", error);
       }
     } catch (error) {
       console.error(error);
-      alert("Failed to send email. Check the console for details bro.", error);
+      //alert("Failed to send email. Check the console for details bro.", error);
     }
   } else {
-    alert("Please fill out the form");
+    //alert("Please fill out the form");
+    console.log("Please fill out the form");
   }
 }
