@@ -23,33 +23,25 @@ const transporter = nodemailer.createTransport({
 // Øvelse 1: Send en mail til dig selv med nodemailer via Gmail
 // Se ovenstående under auth for oprettelse af Gmail-konto
 
-async function mailToUser(htmlMsg, recieverMail, name) {
+async function mailToUser(htmlMsg, recieverMail, subjectText) {
   try {
     // send mail with defined transport object
     // SMTP transport: https://nodemailer.com/smtp/
     const info = await transporter.sendMail({
       // Message configuration: https://nodemailer.com/message/
       from: "Joe & The Juice <joeanthejuice2023@gmail.com>", // sender address
-      to: recieverMail, // list of receiver addresses
-      subject: `Velkommen til Joe & The Juice ${name}`, // subject line
+      to: [recieverMail], // list of receiver addresses
+      //if name is not defined, then use username
+      subject: subjectText, // Subject line
       text: "Hej!", // plain text body
       html: htmlMsg, // html body
     });
-
-    console.log("Message sent: %s");
-    // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com
-  } catch (error) {
-    console.error('Error sending email i fil mail.js:', error);
+    console.log("Mail sent to: ", recieverMail, "with subject: ", subjectText);
   }
-}
-
-
-// Øvelse 2: Kald funktionen mailToUser med parametre og opdater funktionen mailToUser
-//så den tager imod parametre
-// to, subject, text og html
-
-mailToUser("Hvaaa sååå broder").catch(console.error);
-
+  catch (error) {
+    console.log("Error sending email:", error);
+  }
+};
 //eksporter funktionen mailToUser
 module.exports = {
   mailToUser,

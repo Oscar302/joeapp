@@ -72,7 +72,8 @@ Router.post("/service/sendText", (req, res) => {
 // sendEmail route
 Router.post("/service/sendEmail", async (req, res) => {
   const { htmlMsg, recieverMail, name } = req.body;
-
+  console.log('Received a POST request at /site/service/sendEmail');
+  console.log('Request body:', req.body);
   try {
     const emailInfo = await emailService.mailToUser(
       htmlMsg,
