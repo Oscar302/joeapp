@@ -1,5 +1,60 @@
-document.querySelectorAll("input").forEach((item) => {});
+// signup.js
+const bcrypt = require("bcrypt");
+const express = require("express");
+const app = express();
+const path = require("path");
+const sqlite3 = require("sqlite3").verbose();
 
+const db = new sqlite3.Database("./db.sqlite");
+const salt_rounds = 10;
+
+// Other code...
+const addUserToDatabase = (username, email, password) => {
+  bcrypt.hash(password, salt_rounds, (err, hashedPassword) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+
+      db.run(
+        "insert into users (username, email, password) values (?, ?, ?)",
+        [username, email, hashedPassword],
+        function (err) {
+          if (err) {
+            console.error(err);
+          }
+        }
+      );
+    });
+  };
+
+
+const getUserByEmail = (userEmail) => {
+  return new Promise((resolve, reject) => {
+    db.all(
+      "select * from users where email=(?) OR email=(?)",  // Fetch by both hashed and plain email
+      [userEmail, bcrypt.hashSync(userEmail, salt_rounds)],  // Use bcrypt.hashSync to get hashed email
+      (err, rows) => {
+        if (err) {
+          console.error(err);
+          return reject(err);
+        }
+        return resolve(rows);
+      }
+    );
+  });
+};
+// Other code...
+
+module.exports = {
+  addUserToDatabase,
+  getUserByEmail,
+  // Other exports if any...
+};
+
+
+// gemmer lige denne til inspiration. Skal måske uploade cookies hos clienten, så kan godt være jeg skal bruge den her kode
+/*
 async function kookie() {
   const username = document.getElementById("username-sign-up").value;
   const password = document.getElementById("password-sign-up").value;
@@ -76,3 +131,4 @@ async function kookie() {
     console.log("Please fill out the form");
   }
 }
+*/

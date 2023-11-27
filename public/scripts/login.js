@@ -1,8 +1,14 @@
+
+// Lige pt. behøver der ikke kører nogen kode på denne fil. Kan dog godt være vi skal omstrukturere senere for ordentlighedens skyld (eksempelvis rykke login funktionen over i denne fil, så den ikke ligger i signup.js)
+
+
+
 //import the user object from the config file
 //const user = require("../../config/config.js").user;
 //import { user } from "../../config/config.js";
 
 //user object
+/*
 const customers = [
   {
     firstname: "John",
@@ -77,6 +83,7 @@ async function login() {
 //save user in local storage
 
 //add an event listener to the login button
+/*
 
 document.getElementById("loginButton").addEventListener("click", function(event) {
     event.preventDefault(); // prevent the form from submitting
@@ -119,3 +126,4 @@ function signout() {
     }
   }
   CheckLogin();
+  */

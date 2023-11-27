@@ -32,9 +32,9 @@
       <div id="article">
         <div>
           <p id="para-on-login">Log In to your Joe account below to gain access to all the features and offers that the Joe And the Juice has available!</p>
-          <form>
-            <input placeholder="Username" type="text" id="username-log-in"/>
-            <input placeholder="Password" type="password" id="password-log-in"/>
+          <form action="/login" method="post">
+            <input placeholder="Email Adress" type="email" required id="email-login" name="email">
+            <input placeholder="Password" type="password" required id="password-login" name="password">
           <div class="buttons">
                 <button id="loginButton">Log In
                   <img src="https://play-lh.googleusercontent.com/7rrLQZ1babW5YVAeWigNtVeJYtwqH1hzHosdZj1P-bpDGcmg6UKyHEawJ9tIu-3PewHe" width="15px" height="15px">
@@ -52,5 +52,6 @@
     <footer></footer>
   </body>
   <script src="../script.js"></script>
+  <script src="../scripts/login.js"></script>
   <script type="module" src="../scripts/login.js"></script>
 </html>
