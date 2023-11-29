@@ -77,7 +77,7 @@ app.post('/login', async (req, res) => {
   }
 });
 
-app.get('/user', validateToken, (req, res) => {
+app.get('/user.html', validateToken, (req, res) => {
     res.json('Hello');
 });
 

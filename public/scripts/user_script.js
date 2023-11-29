@@ -26,4 +26,23 @@ function getCookie(name) {
 checkLoggedIn();
 */
 
+function getCookie(name) {
+    const cookies = document.cookie.split('; ');
+    for (const cookie of cookies) {
+        const [cookieName, cookieValue] = cookie.split('=');
+        if (cookieName === name) {
+            return cookieValue;
+        }
+    }
+    return null;
+}
 
+// Display the 'access-token' cookie
+const accessToken = getCookie('access-token');
+if (accessToken) {
+    console.log("Access Token:", accessToken);
+    alert("Access Token: " + accessToken);
+} else {
+    console.log("Access Token not found.");
+    alert('Access Token not found.');
+}

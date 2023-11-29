@@ -8,6 +8,8 @@ const createTokens = (user) => {
     return accessToken;
 }
 
+
+
 const validateToken = (req, res, next) => {
 const accessToken = req.cookies["access-token"];
 if (!accessToken) {

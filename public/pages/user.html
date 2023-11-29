@@ -30,6 +30,26 @@
     </div>
     <footer></footer>
 </body>
-<script src="../script.js" ></script>
-<script src="../scripts/user_script.js"></script>
+<script> 
+function getCookie(name) {
+    const cookies = document.cookie.split('; ');
+    for (const cookie of cookies) {
+        const [cookieName, cookieValue] = cookie.split('=');
+        if (cookieName === name) {
+            return cookieValue;
+        }
+    }
+    return null;
+}
+
+// Display the 'access-token' cookie on the page
+const accessToken = getCookie('access-token');
+if (accessToken) {
+    const tokenDisplay = document.createElement('p');
+    tokenDisplay.textContent = 'Access Token: ' + accessToken;
+    document.body.appendChild(tokenDisplay);
+} else {
+    console.log('Access Token not found.');
+}
+    </script>
 </html>
