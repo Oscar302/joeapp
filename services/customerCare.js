@@ -25,8 +25,8 @@ async function ChatGPTRequest(message){
         return reply
     }
     catch(err){
-        console.log(request)
-        reply = request.error.message
+        console.log(request.err)
+        reply = request.err
     }
 }
 
