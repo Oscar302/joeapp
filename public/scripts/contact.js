@@ -4,26 +4,17 @@ const chat = document.getElementById("chat");
 
 const sendButton = document.getElementById("sendButton");
 
-socket.on("connect", () => {
 
-    console.log("connected to server")  
+function LogReply(reply){
+    li_r = document.createElement("li")
+    li_r.classList.add("replies")
+    li_r.innerHTML = reply
+    chat.appendChild(li_r)
+}
 
-    socket.on("reply", async (reply) => {
 
-        await reply;
 
-        if(reply == undefined){
-            return
-        }
-
-        li_r = document.createElement("li")
-        li_r.classList.add("replies")
-        li_r.innerHTML = reply
-        chat.appendChild(li_r)
-    })
-})
-
-sendButton.addEventListener("click", () => {
+sendButton.addEventListener("click", async () => {
 
     let question = document.getElementById("questions").value
 
@@ -31,12 +22,27 @@ sendButton.addEventListener("click", () => {
         return
     }
 
-    socket.emit("question", question)
-
     li_q = document.createElement("li")
     li_q.classList.add("question")
     li_q.innerHTML = question
     
     chat.appendChild(li_q)
     document.getElementById("questions").value = "";
+
+    let data = await fetch("/site/service/chatbot", {
+        method : "POST",
+        headers : {
+            "Content-Type" : "application/json"
+        },
+        body : JSON.stringify(
+            {
+                "question" : question
+            }
+        )
+    })
+    .then(res => res.json())
+    
+    if(data !== undefined){
+        LogReply(data.reply)
+    }
 })

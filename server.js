@@ -47,37 +47,7 @@ app.get("/", (req, res) => {
 });
 
 
-app.post('/signup', (req, res) => {
-  const { username, email, password } = req.body;
-
-  // Call function to add user to the database with hashed password
-  addUserToDatabase(username, email, password);
-
-  // redirect to login page
-  res.redirect('/public/pages/login.html')
-});
-
-// Login endpoint
-app.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-
-  // Get the user from the database
-  const user = await getUserByEmail(email);
-
-  // Check if the user exists in the database and if the password is correct
-  if (!user || user.length === 0 || !(await bcrypt.compare(password, user[0].password))) {
-      return res.status(401).send('Invalid email or password');
-  } else {
-    const accessToken = createTokens(user[0]);
-    res.cookie('access-token', accessToken, {maxAge: 3600, httpOnly: true});
-  
-
-  // User exists, redirect to home page
-  res.redirect('/public/pages/user.html');
-  }
-});
-
-app.get('/user.html', validateToken, (req, res) => {
+app.get('/user', validateToken, (req, res) => {
     res.json('Hello');
 });
 
@@ -91,7 +61,6 @@ io.on("connection", socket => {
 
   socket.on("question", async question => {
 
-    let reply = await ChatGPTRequest(question);
     socket.emit("reply", reply)
 
   })

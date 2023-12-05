@@ -7,8 +7,9 @@ const bodyParser = require("body-parser");
 
 const products = require("../config/config").products;
 const emailService = require("../services/mail.js");
-
 Router.use(bodyParser.json());
+
+const { ChatGPTRequest } = require("../services/customerCare.js");
 
 Router.get("/", (req, res) => {
   res.send(users);
@@ -28,6 +29,12 @@ Router.get("/about", (req, res) => {
 
 Router.get("/project", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/pages", "project.html"));
+});
+
+Router.get("/userpage", (req, res) => {
+
+ res.sendFile(path.join(__dirname, "../public/pages", "user.html"));
+
 });
 
 Router.get("/users", (req, res) => {
@@ -86,6 +93,45 @@ Router.post("/service/sendEmail", async (req, res) => {
     res
       .status(500)
       .send({ msg: "Internal Server Error", error: error.message });
+  }
+});
+
+//Chatbot
+Router.post("/service/chatbot", async (req, res) => {
+
+  let question = req.body.question;
+  let reply = await ChatGPTRequest(question);
+
+  res.send({reply : reply})
+
+})
+
+Router.post('/signup', (req, res) => {
+  const { username, email, password } = req.body;
+
+  // Call function to add user to the database with hashed password
+  addUserToDatabase(username, email, password);
+
+  // redirect to login page
+  res.redirect('/public/pages/login.html')
+});
+
+// Login endpoint
+Router.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  // Get the user from the database
+  const user = await getUserByEmail(email);
+
+  // Check if the user exists in the database and if the password is correct
+  if (!user || user.length === 0 || !(await bcrypt.compare(password, user[0].password))) {
+      return res.status(401).send('Invalid email or password');
+  } else {
+    const accessToken = createTokens(user[0]);
+    res.cookie('access-token', accessToken, {maxAge: 3600, httpOnly: true});
+  
+  // User exists, redirect to home page
+    res.redirect('/site/userpage');
   }
 });
 

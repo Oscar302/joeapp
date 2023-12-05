@@ -29,6 +29,5 @@ async function ChatGPTRequest(message){
         reply = request.error.message
     }
 }
-ChatGPTRequest("I have a problem with my order")
 
 module.exports = {ChatGPTRequest};    // Exporterer funktionen så den kan bruges i andre filer
