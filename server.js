@@ -5,15 +5,13 @@ const path = require("path");
 const bcrypt = require("bcrypt");
 const salt_rounds = 10;
 const cookieParser = require('cookie-parser');
-const { validateToken } = require('./public/scripts/JWT');
-const { createTokens } = require('./public/scripts/JWT');
+const { validateToken } = require('./models/JWT.js');
+const { createTokens } = require('./models/JWT.js');
 const { addUserToDatabase } = require('./public/scripts/signup');
 const { getUserByEmail } = require('./public/scripts/signup');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-
-
 const {ChatGPTRequest} = require("./services/customerCare.js");
 
 //sockets
@@ -39,6 +37,10 @@ app.use(express.static("public"));
 app.use("/site", router);
 app.use('/public', express.static(path.join(__dirname, 'public')));
 
+//Henter db filen
+const sqlite3 = require("sqlite3").verbose();
+const db = new sqlite3.Database("./db.sqlite");
+
 
 app.use(express.urlencoded({ extended: true }));
 
@@ -48,7 +50,16 @@ app.get("/", (req, res) => {
 
 
 app.get('/user', validateToken, (req, res) => {
-    res.json('Hello');
+    
+    const data = db.all(`SELECT * FROM users WHERE username = '${req.user.username}'`, (err, rows) => {
+        if(err){
+            console.log(err);
+            res.sendStatus(500);
+        } else {
+            res.send(rows);
+        }
+    })
+
 });
 
 // 404 page
@@ -58,13 +69,6 @@ app.use((req, res) => {
 
 io.on("connection", socket => {
   console.log(socket.id)
-
-  socket.on("question", async question => {
-
-    socket.emit("reply", reply)
-
-  })
-
 })
 
 server.listen(PORT, HOST, () => {

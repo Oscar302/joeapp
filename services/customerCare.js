@@ -12,8 +12,8 @@ async function ChatGPTRequest(message){
         },
         body : JSON.stringify(
             {
-                "model": "gpt-4",
-                "messages": [{"role": "system", "content" : "You're a JoeAndTheJuice customer care agent."}, {"role": "user","content": `${message}`},],
+                "model": "gpt-3.5",
+                "messages": [{"role": "system", "content" : "You're a Joe & The Juice customer care agent."}, {"role": "user","content": `${message}`},],
                 "temperature": 0.7
             }
         ) 
