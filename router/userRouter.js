@@ -58,17 +58,19 @@ userRouter.get("/delete/:username", validateToken, async (req, res) => {
     res.send({user : user})
 })
 
-userRouter.get('/page/:username', validateToken, (req, res) => {
+userRouter.get('/page/userpage', validateToken, async (req, res) => {
     
-  user = req.params.username;
+  let currentUser = req.cookies.username;
 
   query = "SELECT * FROM users WHERE username = (?)"
 
-  values = [user]
+  values = [currentUser]
 
-  RunSQL(query, user)
+  let user = await RunSQL(query, values);
+  console.log(user)
+  const {username, email, password, name, billing} = user[0];
 
-  res.sendFile(path.join(__dirname, "../public/pages", "user.html"));
+  res.render("user", {username : username, email : email})
       
 });
 
