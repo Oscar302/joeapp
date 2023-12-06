@@ -1,36 +1,55 @@
 
-
 //make a login function
-
 console.log("login.js loaded");
-
-
 
 async function login() {
   // Get the values from the input fields
-  const username = document.getElementById("username-log-in").value;
-  const password = document.getElementById("password-log-in").value;
+  const username = document.getElementById("username-login").value;
+  const password = document.getElementById("password-login").value;
 
-  // Check if username and password are provided
-  if (username && password) {
-    const customer = customers.find(
-      (user) => user.username === username && user.password === password
-    );
-
-    if (customer) {
-      // Set a cookie or store the user information locally for client-side authentication
-      document.cookie = `userAuth=${username}; max-age=3600`; // 1 hour expiration
-      alert("Du er blevet logget ind");
-      window.location.href = "/site/user";
-      // Redirect to another page or perform further actions
-    }
+  if (username === "" || password === "") {
+    return alert("Please provide a username and password");  
   }
+
+  let data = await fetch("/user/login", {
+    method : "POST",
+    headers : {
+      "Content-Type" : "application/json"
+    },
+    body : JSON.stringify({
+      username : username,
+      password : password
+    })
+  })
+  .then(res => res.json())
+
+  if(data.status === 200){
+    window.location.href = `/user/page/${username}`;
+  } else {
+    alert(data.msg);
+  }
+
 }
 
-//save user in local storage
+async function logout(){
+  await fetch("/user/logout")
+  .then(res => res.json())
+  .then(res => {
+    if(res.status === 200){
+      window.location.href = "/";
+    }
+  })
+}
 
+
+//make a login function
 document.getElementById("loginButton").addEventListener("click", function(event) {
     event.preventDefault(); // prevent the form from submitting
     login();
   });
 
+//make a logout function
+document.getElementById("signout").addEventListener("click", function(event) {
+    event.preventDefault(); // prevent the form from submitting
+    logout();
+})

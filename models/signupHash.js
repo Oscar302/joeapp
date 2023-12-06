@@ -92,9 +92,43 @@ const getUserByEmail = (userEmail) => {
 };
 // Other code...
 
+
+
+function HashingMachine(input) {
+
+  return new Promise((resolve, reject) => {
+    bcrypt.hash(input, salt_rounds, (err, hashedInput) => {
+      if (err) {
+        console.error("Error in hashing", err);
+        reject(err);
+      }
+      console.log(hashedInput)
+      resolve(hashedInput)  
+    })
+  })
+
+}
+
+function HashedInputMatch(hashedInput, input){
+
+  return new Promise((resolve, reject) => {
+    bcrypt.compare(input, hashedInput, (err, result) => {
+      if (err) {
+        console.error("Error in hashing", err);
+        reject(err);
+      }
+      //console.log(result)
+      resolve(result)  
+    })
+  })
+}
+
+
 module.exports = {
   addUserToDatabase,
   getUserByEmail,
+  HashingMachine,
+  HashedInputMatch
   // Other exports if any...
 };
 

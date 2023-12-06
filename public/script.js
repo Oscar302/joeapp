@@ -1,31 +1,41 @@
 
-function LoadUser(){
-    
+function getCookie(name) {
+    const cookies = document.cookie.split('; ');
+    for (const cookie of cookies) {
+        const [cookieName, cookieValue] = cookie.split('=');
+        if (cookieName === name) {
+            return cookieValue;
+        }
+    }
+    return null;
+}
+
+async function LoadCookes(){
+
     const loginButton = document.getElementById("log-in");
     const signupButton = document.getElementById("sign-up");
     const menu = document.getElementById("menu");
 
-    const user = [];
-    const cookieString = document.cookie.split(';');
-    
-    cookieString.forEach(cookie => {
+    try{
+    let cookies = await fetch("/user/get/cookies")
+    .then(res => res.json())
 
-        //formaterer cookien
-        cookie = cookie.trim();
-        cookie = cookie.split('=');
-
-        user.push(cookie[1]);
-    })
-
-    if(user[0] !== undefined){
-        loginButton.innerHTML = "Log out";
+    if(cookies["access-token"]){
+        loginButton.innerHTML = "Log Out";
         signupButton.style.display = "none";
 
-        page = document.createElement("a");
-        page.href = "/site/user";
-        page.innerHTML = user[0];
-        menu.append(page);
+        profile = document.createElement("a");
+        profile.innerHTML = cookies.username;
+        profile.href = `/user/page/${cookies.username}`;
+        menu.append(profile);
+
+    } else {
+        loginButton.style.display = "block";
+        signupButton.style.display = "block";
+    }}
+    catch(err){
+        return;
     }
-    
+
 }
-LoadUser()
+LoadCookes()

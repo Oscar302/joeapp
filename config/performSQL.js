@@ -4,7 +4,6 @@ const db = new sqlite3.Database("./db.sqlite");
 
 const query = "DELETE FROM users"
 const select = "SELECT * FROM users"
-const values = ["Gert"]
 
 function RunSQL(query, values){
 
@@ -16,12 +15,10 @@ function RunSQL(query, values){
             } else {
                 
                 resolve(rows)
-                console.log(rows)
+                //console.log("RunSQL",rows)
             }
         })
     })
 }
-//RunSQL(query)
-//RunSQL(select)
 
 module.exports = {RunSQL}

@@ -74,25 +74,6 @@ Router.post("/signup", async (req, res) => {
     
 })
 
-// Login endpoint
-Router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-
-  // Get the user from the database
-  const user = await getUserByEmail(email);
-
-  // Check if the user exists in the database and if the password is correct
-  if (!user || user.length === 0 || !(await bcrypt.compare(password, user[0].password))) {
-      return res.status(401).send('Invalid email or password');
-  } else {
-    const accessToken = createTokens(user[0]);
-    res.cookie('access-token', accessToken, {maxAge: 3600, httpOnly: true});
-  
-  // User exists, redirect to home page
-    res.redirect('/site/user');
-  }
-});
-
 
 //EJS, routes
 Router.get("/menu", (req, res) => {
@@ -103,19 +84,6 @@ Router.get("/product/:id", (req, res) => {
   const productId = req.params.id - 1;
 
   res.render("product", { product: products[productId] });
-});
-
-
-Router.get('/user', validateToken, (req, res) => {
-    
-  const data = db.all(`SELECT * FROM users WHERE username = '${req.user.username}'`, (err, rows) => {
-      if(err){
-          console.log(err);
-          res.sendStatus(500);
-      } else {
-          res.send(rows);
-      }
-  })
 });
 
 

@@ -17,8 +17,8 @@ const validateToken = (req, res, next) => {
 
     const accessToken = req.cookies["access-token"];
     if (!accessToken) {
-        return res.status(400).sendFile(path.join(__dirname, "../public", "index.html"));
-        //.json({error: "User not authenticated"});clear
+        return res.json({error: "User not authenticated"});
+        //.sendFile(path.join(__dirname, "../public", "index.html"));
     } try {
         const validToken = verify(accessToken, "JOEAPP_SECRET_KEY");
         if (validToken) {

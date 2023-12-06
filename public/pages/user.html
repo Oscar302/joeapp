@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Missing Title</title>
     <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="stylesheet" type="text/css" href="../stylesheets/user.css">
     <link rel="icon" href="https://play-lh.googleusercontent.com/7rrLQZ1babW5YVAeWigNtVeJYtwqH1hzHosdZj1P-bpDGcmg6UKyHEawJ9tIu-3PewHe">
+    <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
 </head>
 <body>
     <header>
@@ -20,43 +22,22 @@
         </div>
     </header>
     <div id="page-content">
-        <img src="https://cdn2.iconfinder.com/data/icons/mobile-banking-ver-1a/100/1-04-1024.png" width="200px">
-        <div id="displayUser">
-            Username: <span id="span-username"></span>
-            <br>
-            <br>
-            Name: <span id="span-whole-name"></span>
-        </div>
-        <div id="chat">
-            <div id="chat-window">
-                <ul></ul>
+        <div id="inner-page-content">
+            <div id="displayUser">
+                <img src="https://cdn2.iconfinder.com/data/icons/mobile-banking-ver-1a/100/1-04-1024.png" width="200px">
+                <p>Username: <span id="span-username"></span></p>
+                <p>Name: <span id="span-whole-name"></span></p>
             </div>
-            <input type="text" id="chat-input" placeholder="Write to your friend">
+            <div id="chat">
+                <div id="chat-window">
+                    <ul></ul>
+                </div>
+                <input type="text" id="chat-input" placeholder="Write to your friend">
+            </div>
         </div>
     </div>
     <footer></footer>
 </body>
-<script> 
-function getCookie(name) {
-    const cookies = document.cookie.split('; ');
-    for (const cookie of cookies) {
-        const [cookieName, cookieValue] = cookie.split('=');
-        if (cookieName === name) {
-            return cookieValue;
-        }
-    }
-    return null;
-}
-
-// Display the 'access-token' cookie on the page
-const accessToken = getCookie('access-token');
-if (accessToken) {
-    const tokenDisplay = document.createElement('p');
-    tokenDisplay.textContent = 'Access Token: ' + accessToken;
-    document.body.appendChild(tokenDisplay);
-} else {
-    console.log('Access Token not found.');
-}
-    </script>
-    <script src="../script.js"></script>
+<script src="../script.js"></script>
+<script src="../scripts/user.js"></script>
 </html>
