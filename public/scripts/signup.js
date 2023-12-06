@@ -26,10 +26,17 @@ async function CreateUser(){
     const fullName = firstname + " " + lastname;
     address = JSON.stringify(address);
     
+
+    if(password === ""){
+        Alert("Please enter a password");
+        return;
+    }
+
     if(password !== passwordRepeat){
         Alert("Passwords do not match");
         return;
     }
+
 
     let data = await fetch("/site/signup", {
         method : "POST",
@@ -47,12 +54,16 @@ async function CreateUser(){
         )
         })
     .then(res => res.json())
-    .then(data => {
-            Alert(data.msg);
-
+    .then(res => {
+        Alert(res.msg);
+        console.log(res.status)
+        
+        if(res.status === 200){
             setTimeout(() => {
-                window.location.href = "/site/user";
-            }, 2000)
+                window.location.href = res.href;
+            }, 1000)
+        }
+        
     })
 }
 

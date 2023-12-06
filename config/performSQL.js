@@ -23,4 +23,4 @@ function RunSQL(query, values){
     })
 }
 //RunSQL(query)
-RunSQL(select)
+//RunSQL(select)

@@ -4,8 +4,6 @@
 //const user = require("../../config/config.js").user;
 //import { user } from "../../config/config.js";
 
-
-
 //user object
 /*
 const customers = [

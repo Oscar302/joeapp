@@ -71,15 +71,15 @@ Router.post("/signup", async (req, res) => {
 
   if(userAdded.usernameTaken === true){
     // Username is taken, send error message
-    res.send({msg : "Username taken", href : ""}).status(400)
+    res.send({msg : "Username taken", href : "", status : 400}).status(400)
     
   } else if (userAdded.err){
     // Error in adding user to database, send error message
     console.log(userAdded.err, "userAdded.err")
-    res.send({msg : "Error in adding user to database"}).status(400)
+    res.send({msg : "Error in adding user to database", status : 400}).status(400)
     
   } else {
-    res.send({msg : "User created, redirecting...", href : "/site/user"}).status(200)
+    res.send({msg : "User created, redirecting...", href : "/site/user", status : 200}).status(200)
   }
   
     
@@ -137,8 +137,11 @@ Router.post("/service/sendText", (req, res) => {
 // sendEmail route
 Router.post("/service/sendEmail", async (req, res) => {
   const { htmlMsg, recieverMail, name } = req.body;
+  
   console.log('Received a POST request at /site/service/sendEmail');
+  
   console.log('Request body:', req.body);
+
   try {
     const emailInfo = await emailService.mailToUser(
       htmlMsg,
