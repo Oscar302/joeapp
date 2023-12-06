@@ -48,7 +48,7 @@ db.all("CREATE TABLE IF NOT EXISTS newUsers (id INTEGER PRIMARY KEY AUTOINCREMEN
   if(err){
     console.log(err)
   } else {
-    console.log("Table created/started")
+    console.log("Starting: Creating Table IF NOT EXISTS newUsers")
   }
 })
 
@@ -82,7 +82,7 @@ io.on("connection", socket => {
 })
 
 server.listen(PORT, HOST, () => {
-  console.log(`Server is now running on port ${PORT}`);
+  console.log(`Starting: Server is now running on port ${PORT}`);
 });
 
 

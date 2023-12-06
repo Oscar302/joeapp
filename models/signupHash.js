@@ -15,15 +15,17 @@ const addUserToDatabase = async (username, email, password) => {
 
   // Check if username is taken    
   if(await isUserNameTaken(username).catch(err => console.log(err))){
-    return {usernameTaken : true, err : "Username already taken"};
+      return {usernameTaken : true, err : "Username already taken"};
   }
 
   // Hash password
-  console.log("Hashing password")
+  console.log("Hashing password:", password)
+  
   return new Promise((resolve, reject) => {
+
   bcrypt.hash(password, salt_rounds, (err, hashedPassword) => {
     if (err) {
-      console.error("Error in hashing",err);
+      console.error("Error in hashing", err);
       reject(err);
     }
 
@@ -33,11 +35,10 @@ const addUserToDatabase = async (username, email, password) => {
       db.run(query, values, function (err) {
           if (err) {
             console.error(err);
-            reject(err);
+            reject({err : err});
           } else {
             console.log(`${username} added to database`);
-
-            resolve({usernameTaken : false, err : "User created"})
+            resolve({usernameTaken : false, status : "User Created"})
           }
         }
       );
@@ -84,7 +85,7 @@ const getUserByEmail = (userEmail) => {
           console.error(err);
           return reject(err);
         }
-        return resolve(rows);
+          return resolve(rows);
       }
     );
   });

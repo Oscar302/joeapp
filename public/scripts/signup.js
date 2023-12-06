@@ -46,9 +46,14 @@ async function CreateUser(){
             }
         )
         })
+    .then(res => res.json())
+    .then(data => {
+            Alert(data.msg);
 
-
-        
+            setTimeout(() => {
+                window.location.href = "/site/user";
+            }, 2000)
+    })
 }
 
 
