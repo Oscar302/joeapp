@@ -26,7 +26,7 @@ async function LoadCookes(){
 
         profile = document.createElement("a");
         profile.innerHTML = cookies.username;
-        profile.href = `/user/page/${cookies.username}`;
+        profile.href = `/user/page/userpage`;
         menu.append(profile);
 
     } else {
