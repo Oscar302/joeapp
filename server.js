@@ -20,6 +20,8 @@ const io = require('socket.io')(server, { cors: { origin: '*' }})
 
 // Importerer router filen
 const router = require("./router/router.js");
+const { userRouter } = require("./router/userRouter.js");
+const { serviceRouter } = require("./router/serviceRouter.js");
 
 //produkter
 const products = require("./config/config").products;
@@ -35,6 +37,8 @@ app.set('views', path.join(__dirname, '/public/pages/views'));
 // Sætter public folderen som statisk (ikke ejs filer)
 app.use(express.static("public"));
 app.use("/site", router);
+app.use("/user", userRouter);
+app.use("/service", serviceRouter);
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 
@@ -53,7 +57,7 @@ db.all("CREATE TABLE IF NOT EXISTS newUsers (id INTEGER PRIMARY KEY AUTOINCREMEN
 })
 
 
-
+//Index page
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html", "signup.html", "login.html"));
 });
@@ -64,10 +68,13 @@ app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname, "public/pages", "404.html"));
 });
 
+//Socket pt. ubrugt skal bruges til chat mellem 2 brugere
 io.on("connection", socket => {
   console.log(socket.id)
 })
 
+
+//Start server
 server.listen(PORT, HOST, () => {
   console.log(`Starting: Server is now running on port ${PORT}`);
 });

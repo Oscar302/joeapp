@@ -15,7 +15,7 @@ const { getUserByEmail, addUserToDatabase } = require('../models/signupHash.js')
 const { ChatGPTRequest } = require("../services/customerCare.js");
 const { validateToken } = require("../models/tokenGen.js");
 
-//Endpoints
+// Standard Endpoints
 Router.get("/", (req, res) => {
   res.send(users);
 });
@@ -35,12 +35,6 @@ Router.get("/about", (req, res) => {
 Router.get("/project", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/pages", "project.html"));
 });
-
-
-Router.get("/users", (req, res) => {
-  res.send(users);
-});
-
 
 //Signup endpoint
 Router.get("/signup", (req, res) => {
@@ -111,56 +105,6 @@ Router.get("/product/:id", (req, res) => {
   res.render("product", { product: products[productId] });
 });
 
-
-//Service Routes
-Router.post("/service/sendText", (req, res) => {
-  text = req.body.message;
-  number = req.body.number;
-
-  number = number.replace(/\s/g, "");
-
-  res.send({ msgSent: number });
-  try {
-    SendText(text, number);
-    res.send({ msg: "Message sent", msgSent: text });
-  } catch (err) {
-    res.send({ msg: "Message failed to send", err: err.message });
-  }
-});
-
-// New route for sending emails
-// sendEmail route
-Router.post("/service/sendEmail", async (req, res) => {
-  const { htmlMsg, recieverMail, name } = req.body;
-  
-  console.log('Received a POST request at /site/service/sendEmail');
-  
-  console.log('Request body:', req.body);
-
-  try {
-    const emailInfo = await emailService.mailToUser(
-      htmlMsg,
-      recieverMail,
-      name
-    );
-    res.send({ msg: "Email sent successfully", emailInfo });
-  } catch (error) {
-    console.error("Error sending email:", error);
-    res
-      .status(500)
-      .send({ msg: "Internal Server Error", error: error.message });
-  }
-});
-
-//Chatbot
-Router.post("/service/chatbot", async (req, res) => {
-
-  let question = req.body.question;
-  let reply = await ChatGPTRequest(question);
-
-  res.send({reply : reply})
-
-})
 
 Router.get('/user', validateToken, (req, res) => {
     

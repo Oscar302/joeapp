@@ -1,5 +1,15 @@
-//const socket = io("http://localhost:3000")
-const socket = io('http://157.245.78.214/')
+
+let socket;
+
+//Afgører hvorvidt socket skal køre i vores i localhost eller via vores droplet.
+if(document.URL.includes("localhost")){
+    console.log("socket running on", document.URL)
+    socket = io("http://localhost:3000")    
+} else {
+    console.log("socket running on", document.URL)
+    socket = io('http://157.245.78.214/')
+}
+
 const chat = document.getElementById("chat");
 
 const sendButton = document.getElementById("sendButton");
@@ -26,7 +36,7 @@ sendButton.addEventListener("click", async () => {
     chat.appendChild(li_q)
     document.getElementById("questions").value = "";
 
-    let data = await fetch("/site/service/chatbot", {
+    let data = await fetch("/service/chatbot", {
         method : "POST",
         headers : {
             "Content-Type" : "application/json"
