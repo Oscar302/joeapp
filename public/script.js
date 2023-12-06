@@ -6,11 +6,18 @@ const signupButton = document.getElementById("sign-up");
 
 function LoadUser(){
 
-    let user = localStorage.getItem("user");
-    if(user != null){
+    const user = {};
+    const cookieString = document.cookie.split(';');
+    
 
-        loginButton.innerHTML = "Sign Out"
-        signupButton.style.display = "none";
-    }
+    cookieString.forEach(cookie => {
+
+        //formaterer cookien
+        cookie = cookie.trim();
+        cookie = cookie.split('=');
+
+        console.log(cookie)
+    })
+    
 }
 LoadUser()

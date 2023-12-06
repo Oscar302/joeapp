@@ -9,8 +9,13 @@ const products = require("../config/config").products;
 const emailService = require("../services/mail.js");
 Router.use(bodyParser.json());
 
+//Importerede funktioner
+const { createTokens } = require('../models/JWT.js');
+const { getUserByEmail, addUserToDatabase } = require('../models/signupHash.js');
 const { ChatGPTRequest } = require("../services/customerCare.js");
 
+
+//Endpoints
 Router.get("/", (req, res) => {
   res.send(users);
 });
@@ -31,7 +36,7 @@ Router.get("/project", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/pages", "project.html"));
 });
 
-Router.get("/userpage", (req, res) => {
+Router.get("/user", (req, res) => {
 
  res.sendFile(path.join(__dirname, "../public/pages", "user.html"));
 
@@ -41,13 +46,52 @@ Router.get("/users", (req, res) => {
   res.send(users);
 });
 
+
+//Signup endpoint
 Router.get("/signup", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/pages", "signup.html"));
 });
 
-Router.get("/phone", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public", "index.html"));
+
+//Create user endpoint
+Router.post("/signup", async (req, res) => {
+
+  const { username, email, password } = req.body;
+
+  // Call function to add user to the database with hashed password
+  let userAdded = await addUserToDatabase(username, email, password)
+
+  //console.log(userAdded, "userAdded")
+
+  if(userAdded.usernameTaken === true){
+    // Username is taken, send error message
+    res.send({msg : "Username taken"}).status(400)
+  
+  } else {
+    res.redirect("/site/user");
+  }
+    
+})
+
+// Login endpoint
+Router.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  // Get the user from the database
+  const user = await getUserByEmail(email);
+
+  // Check if the user exists in the database and if the password is correct
+  if (!user || user.length === 0 || !(await bcrypt.compare(password, user[0].password))) {
+      return res.status(401).send('Invalid email or password');
+  } else {
+    const accessToken = createTokens(user[0]);
+    res.cookie('access-token', accessToken, {maxAge: 3600, httpOnly: true});
+  
+  // User exists, redirect to home page
+    res.redirect('/site/user');
+  }
 });
+
 
 //EJS, routes
 Router.get("/menu", (req, res) => {
@@ -60,6 +104,8 @@ Router.get("/product/:id", (req, res) => {
   res.render("product", { product: products[productId] });
 });
 
+
+//Service Routes
 Router.post("/service/sendText", (req, res) => {
   text = req.body.message;
   number = req.body.number;
@@ -105,34 +151,5 @@ Router.post("/service/chatbot", async (req, res) => {
   res.send({reply : reply})
 
 })
-
-Router.post('/signup', (req, res) => {
-  const { username, email, password } = req.body;
-
-  // Call function to add user to the database with hashed password
-  addUserToDatabase(username, email, password);
-
-  // redirect to login page
-  res.redirect('/public/pages/login.html')
-});
-
-// Login endpoint
-Router.post('/login', async (req, res) => {
-  const { email, password } = req.body;
-
-  // Get the user from the database
-  const user = await getUserByEmail(email);
-
-  // Check if the user exists in the database and if the password is correct
-  if (!user || user.length === 0 || !(await bcrypt.compare(password, user[0].password))) {
-      return res.status(401).send('Invalid email or password');
-  } else {
-    const accessToken = createTokens(user[0]);
-    res.cookie('access-token', accessToken, {maxAge: 3600, httpOnly: true});
-  
-  // User exists, redirect to home page
-    res.redirect('/site/userpage');
-  }
-});
 
 module.exports = Router;

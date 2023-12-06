@@ -3,13 +3,14 @@
     line-height: 1.5;
 }
 
-#page-content div form{
+#form{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    grid-gap: 10px; 
+    grid-template-rows: repeat(4, 2fr);
+    grid-gap: 20px; 
     width: 100%;
     height: 50%;
+    translate: 30px 0px;
 }
 
 #page-content div input{
@@ -60,4 +61,31 @@
 #page-content div input::placeholder{
     color: black;
     font-weight: normal;
+}
+
+#alertbox{
+    display: none;
+    position: absolute;
+    height: auto;
+    width: 33%;
+    height: 50px;
+    border-radius: 5px;
+    z-index: 99999;
+    transition: 0.5s;
+}
+
+#alertbox{
+    font-weight: bold;
+    color :black;
+    text-decoration: underline;
+    text-shadow: pink 2px 2px 5px;
+}
+
+#alert-container{
+    width: 100%;
+    height: 20%;
+    translate: 0px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

@@ -11,18 +11,19 @@ const createTokens = (user) => {
 
 
 const validateToken = (req, res, next) => {
-const accessToken = req.cookies["access-token"];
-if (!accessToken) {
-    return res.status(400).json({error: "User not authenticated"});
-} try {
-    const validToken = verify(accessToken, "Fernando_torres");
-    if (validToken) {
-    req.authenticated = true;
-    return next();
+
+    const accessToken = req.cookies["access-token"];
+    if (!accessToken) {
+        return res.status(400).json({error: "User not authenticated"});
+    } try {
+        const validToken = verify(accessToken, "Fernando_torres");
+        if (validToken) {
+        req.authenticated = true;
+        return next();
     }
-} catch (err) {
-    return res.status(400).json({ error: err });
-}
+    } catch (err) {
+        return res.status(400).json({ error: err });
+    }
 };
 
 

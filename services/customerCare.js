@@ -12,7 +12,7 @@ async function ChatGPTRequest(message){
         },
         body : JSON.stringify(
             {
-                "model": "gpt-3.5",
+                "model": "gpt-3.5-turbo",
                 "messages": [{"role": "system", "content" : "You're a Joe & The Juice customer care agent."}, {"role": "user","content": `${message}`},],
                 "temperature": 0.7
             }
@@ -25,8 +25,10 @@ async function ChatGPTRequest(message){
         return reply
     }
     catch(err){
-        console.log(request.err)
-        reply = request.err
+        console.log(request)
+        if(reply = undefined){
+            reply = "Ran into an error..."
+        }
     }
 }
 

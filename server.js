@@ -2,16 +2,16 @@
 const express = require("express");
 const app = express();
 const path = require("path");
+
 const bcrypt = require("bcrypt");
 const salt_rounds = 10;
 const cookieParser = require('cookie-parser');
 const { validateToken } = require('./models/JWT.js');
-const { createTokens } = require('./models/JWT.js');
-const { addUserToDatabase } = require('./public/scripts/signup');
-const { getUserByEmail } = require('./public/scripts/signup');
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
 const {ChatGPTRequest} = require("./services/customerCare.js");
 
 //sockets
@@ -36,13 +36,23 @@ app.set('views', path.join(__dirname, '/public/pages/views'));
 app.use(express.static("public"));
 app.use("/site", router);
 app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({ extended: true }));
 
 //Henter db filen
 const sqlite3 = require("sqlite3").verbose();
 const db = new sqlite3.Database("./db.sqlite");
 
 
-app.use(express.urlencoded({ extended: true }));
+//Opens a connection to the database
+db.all("CREATE TABLE IF NOT EXISTS newUsers (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, email TEXT, password TEXT, name TEXT, billing TEXT)", (err) => {
+  if(err){
+    console.log(err)
+  } else {
+    console.log("Table created/started")
+  }
+})
+
+
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html", "signup.html", "login.html"));
