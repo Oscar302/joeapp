@@ -1,0 +1,64 @@
+
+
+#page-content-inner{
+    width: 80%;
+    height: 80%;
+    background-color: var(--color-quaternary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-shadow: 10px 10px 0px 5px black;
+}
+
+
+h1{
+
+    animation: display;
+    animation-duration: 3s;
+    animation-iteration-count: 1;
+    animation-play-state: running;
+    font-size: 300%;
+    text-decoration: underline pink;
+}
+
+button{
+    animation: showButton 3s;
+    border: 0px;
+    border-bottom: 3px pink solid;
+    font-weight: bold;
+    opacity: 1;
+    width: 200px;
+    height: 25px;
+    padding: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover{
+    transition: 0.2s;
+    background-color: pink;
+}
+
+@keyframes showButton {
+    
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+
+}
+
+@keyframes display {
+    0%{
+        opacity: 0;
+        font-size: 0%;
+    }
+    100%{
+        opacity: 1;
+        font-size: 300%;
+        
+    }   
+}

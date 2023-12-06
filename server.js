@@ -6,7 +6,7 @@ const path = require("path");
 const bcrypt = require("bcrypt");
 const salt_rounds = 10;
 const cookieParser = require('cookie-parser');
-const { validateToken } = require('./models/JWT.js');
+const { validateToken } = require('./models/tokenGen.js');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -58,19 +58,6 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html", "signup.html", "login.html"));
 });
 
-
-app.get('/user', validateToken, (req, res) => {
-    
-    const data = db.all(`SELECT * FROM users WHERE username = '${req.user.username}'`, (err, rows) => {
-        if(err){
-            console.log(err);
-            res.sendStatus(500);
-        } else {
-            res.send(rows);
-        }
-    })
-
-});
 
 // 404 page
 app.use((req, res) => {

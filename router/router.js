@@ -10,10 +10,10 @@ const emailService = require("../services/mail.js");
 Router.use(bodyParser.json());
 
 //Importerede funktioner
-const { createTokens } = require('../models/JWT.js');
+const { createTokens } = require('../models/tokenGen.js');
 const { getUserByEmail, addUserToDatabase } = require('../models/signupHash.js');
 const { ChatGPTRequest } = require("../services/customerCare.js");
-
+const { validateToken } = require("../models/tokenGen.js");
 
 //Endpoints
 Router.get("/", (req, res) => {
@@ -36,11 +36,6 @@ Router.get("/project", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/pages", "project.html"));
 });
 
-Router.get("/user", (req, res) => {
-
- res.sendFile(path.join(__dirname, "../public/pages", "user.html"));
-
-});
 
 Router.get("/users", (req, res) => {
   res.send(users);
@@ -166,5 +161,18 @@ Router.post("/service/chatbot", async (req, res) => {
   res.send({reply : reply})
 
 })
+
+Router.get('/user', validateToken, (req, res) => {
+    
+  const data = db.all(`SELECT * FROM users WHERE username = '${req.user.username}'`, (err, rows) => {
+      if(err){
+          console.log(err);
+          res.sendStatus(500);
+      } else {
+          res.send(rows);
+      }
+  })
+});
+
 
 module.exports = Router;
