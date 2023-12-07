@@ -29,7 +29,7 @@ socket.on("connect", async () => {
 
         socket.on("chatMessage", (message) => {
             //console.log(message)
-            appendMessage(message.message)
+            appendMessage(username + " – "+ message.message)
         })
         
 })

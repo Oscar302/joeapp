@@ -104,6 +104,8 @@ userRouter.post('/signup', async (req, res) => {
 
 userRouter.get("/get/cookies", validateToken, (req, res) => {
 
+  cookies = req.cookies["access-token"];
+
   res.send(req.cookies)
 })
 
@@ -111,6 +113,7 @@ userRouter.get("/logout", validateToken, (req, res) => {
   res.clearCookie("access-token");
   res.clearCookie("username");
   res.clearCookie("email");
+  res.clearCookie("id");
 
   res.send({msg : "Logged out", status : 200, dest : "/"})
 })

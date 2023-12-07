@@ -10,17 +10,23 @@ function getCookie(name) {
     return null;
 }
 
-async function LoadCookes(){
-
+function LoadCookes(){
     const loginButton = document.getElementById("log-in");
     const signupButton = document.getElementById("sign-up");
     const menu = document.getElementById("menu");
 
-    try{
-    let cookies = await fetch("/user/get/cookies")
-    .then(res => res.json())
+    let cookies = document.cookie.split("; ");
 
-    if(cookies["access-token"]){
+    //console.log(cookies)
+    
+    //formaterer cookies til et objekt    
+    cookies = cookies.reduce((acc, cookie) => {
+        const [cookieName, cookieValue] = cookie.split('=');
+        acc[cookieName] = cookieValue;
+        return acc;
+    }, {});
+
+    if(cookies["username"]){
         loginButton.innerHTML = "Log Out";
         signupButton.style.display = "none";
 
@@ -32,10 +38,6 @@ async function LoadCookes(){
     } else {
         loginButton.style.display = "block";
         signupButton.style.display = "block";
-    }}
-    catch(err){
-        return;
     }
-
 }
 LoadCookes()
