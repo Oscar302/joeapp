@@ -24,7 +24,7 @@ async function login() {
   .then(res => res.json())
 
   if(data.status === 200){
-    window.location.href = `/user/page/${username}`;
+    window.location.href = `/user/page/userpage`;
   } else {
     alert(data.msg);
   }

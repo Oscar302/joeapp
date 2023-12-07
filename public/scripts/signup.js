@@ -38,7 +38,7 @@ async function CreateUser(){
     }
 
 
-    let data = await fetch("/site/signup", {
+    let data = await fetch("/user/signup", {
         method : "POST",
         headers : {
             "Content-Type" : "application/json"

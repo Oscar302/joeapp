@@ -35,13 +35,27 @@ userRouter.post("/login", async (req, res) => {
     const accessToken = createTokens(user);
 
     res.cookie('access-token', accessToken, {maxAge: 3600000, httpOnly: true});
-    res.cookie('username', username, {maxAge: 3600000, httpOnly: true});
-    res.cookie('email', user.email, {maxAge: 3600000, httpOnly: true});
+    res.cookie('username', username, {maxAge: 3600000});
+    res.cookie('email', user.email, {maxAge: 3600000});
+    res.cookie('id', user.id, {maxAge: 3600000});
 
       res.send({msg : "Logging in...", status : 200});
     } else {
       res.send({msg : "User not found..", status : 400});
     }
+})
+
+//Hent bruger...
+userRouter.get("/get/:username", validateToken, async (req, res) => {
+
+  let username = req.params.username
+
+  let query = "SELECT * FROM users WHERE username = (?)"
+  let values = [username]
+  let user = await RunSQL(query, values);
+  user = user[0];
+
+  res.send({user : user})
 })
 
 
@@ -67,7 +81,7 @@ userRouter.get('/page/userpage', validateToken, async (req, res) => {
   values = [currentUser]
 
   let user = await RunSQL(query, values);
-  console.log(user)
+  //console.log(user)
   const {username, email, password, name, billing} = user[0];
 
   res.render("user", {username : username, email : email})
@@ -85,7 +99,7 @@ userRouter.post('/signup', async (req, res) => {
     res.cookie('access-token', accessToken, {maxAge: 3600000, httpOnly: true});
     res.cookie('username', username, {maxAge: 3600000, httpOnly: true});
     res.cookie('email', user.email, {maxAge: 3600000, httpOnly: true});
-
+  
 })
 
 userRouter.get("/get/cookies", validateToken, (req, res) => {
