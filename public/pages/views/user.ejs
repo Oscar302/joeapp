@@ -23,20 +23,38 @@
     </header>
     <div id="page-content">
         <div id="inner-page-content">
+
             <div id="displayUser">
-                <img src="https://cdn2.iconfinder.com/data/icons/mobile-banking-ver-1a/100/1-04-1024.png" width="200px">
-                <p>Username: <%= username %></p>
-                <p>Email: <%= email %></p>
+                <!--<img src="https://cdn2.iconfinder.com/data/icons/mobile-banking-ver-1a/100/1-04-1024.png" width="200px">-->
+                <div>
+                    <p>Name: <%= fullName %></p>
+                    <p>Username: <%= username %></p>
+                    <p>Email: <%= email %></p>
+                </div>
+                <div>
+                    <p>Phone: <%= phone %></p>
+                    <p>Address: <%= street %></p>
+                    <p>City: <%= city %>, <%= zip %></p>
+                    <p>Country: <%= country %></p>
+                </div>
             </div>
+
             <div id="chat">
                 <div id="chat-window">
                     <ul id="messages"></ul>
                 </div>
                 <button id="sendButton">Send</button>
-                <div id="friends-container">
-                    <input id="friend-chat" type="text">
-                </div>
                 <input type="text" id="chat-input" placeholder="Write to your friend">
+            </div>
+            <div id="friends-container">
+                <div id="newFriends">
+                    <input id="addFriend" placeholder="Search for a friend!">
+                    <ul id="friendSearch" class="hidden_list"></ul>
+                </div>
+                <div id="existingFriends">
+                    <p>Friends</p>
+                    <ul id="existingFriends-list"></ul>
+                </div>
             </div>
         </div>
     </div>

@@ -1,6 +1,22 @@
 
-//make a login function
-console.log("login.js loaded");
+let cookies = document.cookie.split("; ");
+
+function ObjectifyCookies(cookies){
+
+    //formaterer cookies til et objekt    
+    cookies = cookies.reduce((acc, cookie) => {
+        const [cookieName, cookieValue] = cookie.split('=');
+        acc[cookieName] = cookieValue;
+        return acc;
+    }, {});
+
+    //console.log(cookies)
+
+    return cookies
+
+}
+const COOKIES = ObjectifyCookies(cookies);
+
 
 async function login() {
   // Get the values from the input fields
@@ -41,7 +57,6 @@ async function logout(){
   })
 }
 
-
 //make a login function
 document.getElementById("loginButton").addEventListener("click", function(event) {
     event.preventDefault(); // prevent the form from submitting
@@ -53,3 +68,4 @@ document.getElementById("signout").addEventListener("click", function(event) {
     event.preventDefault(); // prevent the form from submitting
     logout();
 })
+

@@ -11,7 +11,7 @@ const sqlite3 = require("sqlite3").verbose();
 const db = new sqlite3.Database("./db.sqlite");
 
 // Function to add a user to the database
-const addUserToDatabase = async (username, email, password) => {
+const addUserToDatabase = async (username, password, email, fullName, address, phone) => {
 
   // Check if username is taken    
   if(await isUserNameTaken(username).catch(err => console.log(err))){
@@ -29,8 +29,8 @@ const addUserToDatabase = async (username, email, password) => {
       reject(err);
     }
 
-    let query = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
-    let values = [username, email, hashedPassword];
+    let query = "INSERT INTO allUsers (username, email, password, name, address, phone, friends) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    let values = [username, email, hashedPassword, fullName, address, phone, "[]"];
 
       db.run(query, values, function (err) {
           if (err) {
@@ -53,7 +53,7 @@ function isUserNameTaken (username) {
   return new Promise((resolve, reject) => {
     
     values = [username]
-    query = "SELECT * FROM users WHERE username = (?)"
+    query = "SELECT * FROM allUsers WHERE username = (?)"
 
     db.all(query, values, function(err, rows){
       if(err) {
@@ -74,7 +74,7 @@ function isUserNameTaken (username) {
   
 const getUserByEmail = (userEmail) => {
   return new Promise((resolve, reject) => {
-    let query = "select * from users where email=(?) OR email=(?)"
+    let query = "select * from allUsers where email=(?) OR email=(?)"
     let values = [userEmail, bcrypt.hashSync(userEmail, salt_rounds)]
 
     db.all(

@@ -48,11 +48,11 @@ const db = new sqlite3.Database("./db.sqlite");
 
 
 //Opens a connection to the database
-db.all("CREATE TABLE IF NOT EXISTS newUsers (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, email TEXT, password TEXT, name TEXT, billing TEXT)", (err) => {
+db.all("CREATE TABLE IF NOT EXISTS allUsers (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, email TEXT, password TEXT, name TEXT, address TEXT, phone TEXT, friends TEXT)", (err) => {
   if(err){
     console.log(err)
   } else {
-    console.log("Starting: Creating Table IF NOT EXISTS newUsers")
+    console.log("Starting: Creating Table IF NOT EXISTS allUsers")
   }
 })
 

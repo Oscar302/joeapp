@@ -28,6 +28,16 @@ function LoadCookes(){
 
     if(cookies["username"]){
         loginButton.innerHTML = "Log Out";
+        loginButton.addEventListener("click", function(event) {
+            event.preventDefault();
+            fetch("/user/logout")
+            .then(res => res.json())
+            .then(res => {
+                if(res.status === 200){
+                    window.location.href = "/";
+                }
+            })
+        })
         signupButton.style.display = "none";
 
         profile = document.createElement("a");

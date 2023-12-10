@@ -15,16 +15,18 @@ async function CreateUser(){
         country : allInput[10].value
     }
 
-
     const firstname = allInput[0].value;
     const lastname = allInput[1].value;
     const username = allInput[2].value;
     const email = allInput[3].value;
     const password = allInput[4].value;
     const passwordRepeat = allInput[5].value;
+    const phone = allInput[6].value;
+    
 
     const fullName = firstname + " " + lastname;
-    address = JSON.stringify(address);
+    console.log(fullName);
+    //address = JSON.stringify(address);
     
 
     if(password === ""){
@@ -48,8 +50,9 @@ async function CreateUser(){
                 "username" : username,
                 "password" : password,
                 "email" : email,
-                "name" : fullName,
-                "address" : address
+                "fullName" : fullName,
+                "address" : address,
+                "phone" : phone
             }
         )
         })

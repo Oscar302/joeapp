@@ -6,20 +6,19 @@
     box-shadow: 15px 15px 0px 5px black;
     display: flex;
     align-items:center;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
 #displayUser{
-    width: 50%;
+    width: 30%;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 #chat{
-    margin: 5px;
     width: 50%;
-    height: 95%;
+    height: 90%;
     background-color: var(--color-primary);    
     display: flex;
     justify-content: space-between;
@@ -45,4 +44,60 @@
     margin: 10px;
     padding: 10px;
     border: 0px;
+}
+
+#friends-container{
+    width: 200px;
+    height: 90%;
+    background-color: pink;
+    
+}
+
+#addFriend{
+    width: 190px;
+    padding: 10px 5px 10px 5px;
+    border: 0px;
+}
+
+.hidden_list{
+    opacity: 0;
+}
+
+#friendSearch{
+    text-decoration: none;
+    list-style-type: none;
+}
+
+#friendSearch li{
+    max-width: 100px;
+    margin: 5px;
+    padding: 5px;
+    border: 1px solid black;
+    background-color: var(--color-secondary);
+}
+
+#friendSearch li:hover{
+    cursor: pointer;
+    background-color: var(--color-primary);
+}
+
+#newFriends{
+    height: 50%;
+    width: 100%;
+    border-bottom: 2px solid black;
+}
+
+#existingFriends{
+
+    height: 50%;
+    width: 100%;
+}
+
+#existingFriends-list{
+    text-decoration: none;
+    list-style: none;
+}
+
+#existingFriends p{
+    margin-left: 10px;
 }

@@ -42,39 +42,6 @@ Router.get("/signup", (req, res) => {
 });
 
 
-//Create user endpoint
-Router.post("/signup", async (req, res) => {
-
-  const { username, email, password } = req.body;
-
-  // Call function to add user to the database with hashed password
-  let userAdded = await addUserToDatabase(username, email, password)
-
-  console.log(userAdded, "userAdded")
-
-  //console.log(userAdded, "userAdded")
-  if(userAdded === undefined){
-    // User was not added to the database, send error message
-    res.send({msg : "User not added"}).status(400)
-  }
-
-  if(userAdded.usernameTaken === true){
-    // Username is taken, send error message
-    res.send({msg : "Username taken", href : "", status : 400}).status(400)
-    
-  } else if (userAdded.err){
-    // Error in adding user to database, send error message
-    console.log(userAdded.err, "userAdded.err")
-    res.send({msg : "Error in adding user to database", status : 400}).status(400)
-    
-  } else {
-    res.send({msg : "User created, redirecting...", href : "/site/user", status : 200}).status(200)
-  }
-  
-    
-})
-
-
 //EJS, routes
 Router.get("/menu", (req, res) => {
   res.render("menu", { products: products });
