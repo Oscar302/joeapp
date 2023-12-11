@@ -1,4 +1,3 @@
-
 //const socket = io("http://157.245.78.214");
 const socket = io("http://localhost:3000");
 
@@ -6,9 +5,9 @@ const socket = io("http://localhost:3000");
 const addFriendInput = document.getElementById("addFriend");
 const friendSeach = document.getElementById("friendSearch");
 const users = [];
+const userFriends = [];
 const addFriendButton = document.getElementById("addFriendButton");
 const sendButton = document.getElementById("sendButton");
-
 
 let cookies = document.cookie.split("; ");
 
@@ -47,8 +46,18 @@ function appendSearch(message, container, classname){
             )
         })
         .then(res => res.json())
-        LoadFriends()
-        alert(data.msg)
+        
+        if(data.status === 400){
+            appendMessage(data.msg, "error", "messages")
+        } else {
+            await appendMessage(data.msg, "success", "messages")
+            setTimeout(() => {
+                window.location.reload();
+            }, 1500)
+            
+        }
+        
+        //alert(data.msg)
     })
 
     messageElement.addEventListener("mouseover", () => {
@@ -65,35 +74,16 @@ function appendSearch(message, container, classname){
     
 }
 
-socket.on("connect", async () => {
+function appendMessage(message, classname, container){
 
-        socket.on(username, (user) => {
-            console.log(user)
-        })
+    const messageContainer = document.getElementById(container);
+    const messageElement = document.createElement("li");
 
-        console.log("Connected to server", socket.id, "from client");
-        
-        await socket.emit("joinRoom", 'room123')
+    messageElement.className = classname;
+    messageElement.innerText = message;
+    messageContainer.append(messageElement);
 
-        sendButton.addEventListener("click", () => {
-            
-            const chatInput = document.getElementById("chat-input").value;
-
-            //console.log("sending", chatInput)
-
-            socket.emit("chatMessage", {
-                room : 'room123', message : chatInput
-            })
-
-            document.getElementById("chat-input").value = "";
-        })
-
-        socket.on("chatMessage", (message) => {
-            //console.log(message)
-            //appendMessage(username + " – "+ message.message, "messages")
-        })
-        
-})
+}
 
 document.addEventListener("DOMContentLoaded", async () => {
 
@@ -128,46 +118,123 @@ addFriendInput.addEventListener("keydown", (event) => {
         const searchedUser = users.filter(users => users.username.includes(addFriendInput.value))
         friendSeach.style.opacity = 1
 
-        if(searchedUser.length === 0){
-            appendSearch("No users found", "friendSearch", "friendSearch-item")
-            return;
-        }
-        
-        for(let i = 0; i < searchedUser.length; i++){
-            appendSearch(searchedUser[i].username, "friendSearch", "friendSearch-item")
-        }
+        appendSearch("Loading...", "friendSearch", "friendSearch-item")
+
+            setTimeout( ( ) => {
+                document.querySelectorAll(".friendSearch-item").forEach(item => item.remove())
+
+                if(searchedUser.length === 0){
+
+                
+                    document.querySelectorAll(".friendSearch-item").forEach(item => item.remove())
+                    appendSearch("No users found", "friendSearch", "friendSearch-item")    
+                    return;
+
+            }
+            for(let i = 0; i < searchedUser.length; i++){
+                appendSearch(searchedUser[i].username, "friendSearch", "friendSearch-item")
+            }
+    }, 500)
     } 
 }) 
 
 
-async function LoadFriends(){
 
-    document.querySelectorAll(".friend").forEach(item => item.remove())
+console.log(userFriends)
 
-    const friends = await fetch("/user/get/friends", {
-        method : "POST",
-        headers : {
-            "Content-Type" : "application/json"
-        },
-        body : JSON.stringify(
-            {
-                "username" : username
-            }
-        )
+socket.on("connect", async () => {
+
+
+    await LoadFriends();
+    
+    console.log("Connected to server", socket.id, "from client");
+
+    //socket.emit("join", {room : userFriends[0].room, user : username});
+
+    socket.on("joinedRoom", data => {
+
+
+        if(document.querySelectorAll("welcomeMessage").length > 0){
+            appendMessage(data, "welcomeMessage", "messages")    
+        } else {
+            document.querySelectorAll(".welcomeMessage").forEach(item => item.remove())
+            appendMessage(data, "welcomeMessage", "messages")
+        }
     })
-    .then(res => res.json())
-    
-    
-    const friendList = document.getElementById("existingFriends-list");
 
 
-    for(let i = 0; i < friends.friends.length; i++){
-        const friend = document.createElement("li");
-        friend.className = "friend";
-        friend.innerText = friends.friends[i];
-        friendList.appendChild(friend);
+    socket.on("reply", data => {
+        appendMessage(data, "replies", "messages")
+    })
+
+
+    sendButton.addEventListener("click", async () => {
+
+        let message = document.getElementById("chat-input").value
+
+        if(message === ""){
+            return;
+        }
+
+        //appendMessage(message, "question", "messages")
+    
+        socket.emit("chatMessage", {message : message})
+
+        document.getElementById("chat-input").value = "";
+    })
+
+    async function LoadFriends(){
+
+        //fjerner forrige elementer, for at undgå at de stacker oven på hinanden.
+            document.querySelectorAll(".friend").forEach(item => item.remove())
+    
+            const friends = await fetch("/user/get/friends", {
+                method : "POST",
+                headers : {
+                    "Content-Type" : "application/json"
+                },
+                body : JSON.stringify(
+                    {
+                        "username" : username
+                    }
+                )
+            })
+            .then(res => res.json())
+    
+            const friendList = document.getElementById("existingFriends-list");
+    
+            let justPressed = false;
+            
+
+            for(let i = 0; i < friends.allFriends.length; i++){
+    
+                userFriends.push({friend : friends.allFriends[i].friend, room : friends.allFriends[i].room})
+                const friend = document.createElement("li");
+                const button = document.createElement("button");
+                const div = document.createElement("div");
+
+                div.className = "friend-div";
+
+                button.innerText = "See Friend";
+                button.addEventListener("click", () => {
+                    window.location.href = `/user/get/friend/${friends.allFriends[i].friend}`
+                })
+
+                
+
+                div.addEventListener("click", async () => {
+
+                    await socket.emit("leaveAll")
+                    socket.emit("join", {room : friends.allFriends[i].room, user : friends.allFriends[i].friend});
+                    
+                })
+
+                friend.className = "friend";
+                friend.innerText = friends.allFriends[i].friend;
+                div.appendChild(friend);
+                div.appendChild(button);
+                friendList.appendChild(div);
+            }
     }
-}
-LoadFriends();
-
-
+    
+})

@@ -14,6 +14,7 @@ const { createTokens } = require('../models/tokenGen.js');
 const { getUserByEmail, addUserToDatabase } = require('../models/signupHash.js');
 const { ChatGPTRequest } = require("../services/customerCare.js");
 const { validateToken } = require("../models/tokenGen.js");
+const {noToken} = require("../models/tokenGen.js");
 
 // Standard Endpoints
 Router.get("/", (req, res) => {
@@ -24,7 +25,7 @@ Router.get("/contact", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/pages", "contact.html"));
 });
 
-Router.get("/login", (req, res) => {
+Router.get("/login", noToken, (req, res) => {
   res.sendFile(path.join(__dirname, "../public/pages", "login.html"));
 });
 

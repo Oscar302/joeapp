@@ -1,31 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Missing Title</title>
-    <link rel="stylesheet" type="text/css" href="../style.css">
-    <link rel="icon" href="https://play-lh.googleusercontent.com/7rrLQZ1babW5YVAeWigNtVeJYtwqH1hzHosdZj1P-bpDGcmg6UKyHEawJ9tIu-3PewHe">
-</head>
-<body>
-    <!--Denne template anvendes til at kopiere over på nye sider, når man skal oprette nye sider og beholde det layout, som er tema for resten af opgaven-->
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Joe & And The Juice</title>
+    <link rel="stylesheet" type="text/css" href="../../style.css" />
+    <link rel="stylesheet" type="text/css" href="../../stylesheets/friends.css">
+    <link
+      rel="icon"
+      href="https://play-lh.googleusercontent.com/7rrLQZ1babW5YVAeWigNtVeJYtwqH1hzHosdZj1P-bpDGcmg6UKyHEawJ9tIu-3PewHe"
+    />
+  </head>
+  <body>
     <header>
-        <img id="joe-logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpkCUJNxhIVtWFFM0vzsrGzCtiI8DsgXClPV6JAaA4aQ&s">
-        <div id="menu">
-            <a id="menu-home" href="/">Home</a>
-            <a id="menu-menu" href="/site/menu">Menu</a>
-            <a id="menu-about" href="/site/about">About</a>
-            <a id="menu-contact" href="/site/contact">Contact</a>
-            <a id="log-in" href="/site/login">Log In</a>
-            <a id="sign-up" href="/site/signup">Sign Up</a>
-        </div>
+      <img
+        id="joe-logo"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpkCUJNxhIVtWFFM0vzsrGzCtiI8DsgXClPV6JAaA4aQ&s"
+      />
+      <div id="menu">
+        <a id="menu-home" href="/">Home</a>
+        <a id="menu-menu" href="/site/menu">Menu</a>
+        <a id="menu-about" href="/site/about">About</a>
+        <a id="menu-contact" href="/site/contact">Contact</a>
+        <a id="log-in" href="/site/login">Log In</a>
+        <a id="sign-up" href="/site/user">Sign Up</a>
+      </div>
     </header>
-    <!--Indholdet skal holdes inden i div'en nedenfor-->
     <div id="page-content">
-
+        <div id="friend">
+            <h3>
+                <%= fullName %>
+            </h3>
+            <ul>
+                <li> <%= username %> </li>
+                <li> <%= email %> </li>
+                <li> <%= phone %> </li>
+            </ul>
+            <button>Send Offer</button>
+            <button>Send Offer via Text</button>
+        </div>
     </div>
-    <!--Indholdet skal holdes inden i div'en ovenfor (page-content)-->
-    <footer></footer>
-</body>
+    <footer>
+      <p>Facebook</p>
+      <p>Instagram</p>
+    </footer>
+  </body>
+  <script src="../../script.js"></script>
 </html>

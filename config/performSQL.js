@@ -9,7 +9,7 @@ let values = ["[]"]
 
 function RunSQL(query, values){
 
-    console.log(query, values);
+    //console.log(query, values);
 
     return new Promise((resolve, reject)  => {
          db.all(query, values, function(err, rows){

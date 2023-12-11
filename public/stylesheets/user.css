@@ -87,6 +87,8 @@
     border-bottom: 2px solid black;
 }
 
+
+
 #existingFriends{
 
     height: 50%;
@@ -96,8 +98,40 @@
 #existingFriends-list{
     text-decoration: none;
     list-style: none;
+    width: 100%;
+    max-height: 85%;
+    padding-left: 0px;
+}
+
+.friend-div{
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    border-bottom: 1px solid black;
+    background-color: transparent;
+}
+
+.friend-div:hover{
+    background-color: var(--color-secondary);
+}
+
+.friend-div-active{
+    background-color: var(--color-secondary);
+}
+
+.friend, .friend-div button{
+    margin: 5px 10px 5px 10px;
 }
 
 #existingFriends p{
     margin-left: 10px;
 }
+
+/*
+.friend-div
+.friend-div button
+.friend   
+*/

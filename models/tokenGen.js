@@ -30,4 +30,15 @@ const validateToken = (req, res, next) => {
     }
 };
 
-module.exports = {createTokens, validateToken};
+const noToken = (req, res, next) => {
+
+    const accessToken = req.cookies["access-token"];
+    if (!accessToken) {
+        req.authenticated = false;
+        return next();
+    } else {
+        return res.redirect("/");
+    }
+}
+
+module.exports = {createTokens, validateToken, noToken};

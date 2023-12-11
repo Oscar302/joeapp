@@ -13,6 +13,8 @@ const { error } = require("console");
 const {addUserToDatabase} = require("../models/signupHash.js");
 const { user } = require("../config/config.js");
 const { addFriend } = require("../models/addFriend.js");
+const { compareSync } = require("bcrypt");
+const {noToken} = require("../models/tokenGen.js");
 
 userRouter.use(bodyParser.json());
 userRouter.use(bodyParser.urlencoded({ extended: true }));
@@ -56,13 +58,14 @@ userRouter.post("/add/friend", validateToken, async (req, res) => {
 
   const {username, friend} = req.body;
 
+  console.log(req.body)
+
   const process = await addFriend(username, friend)
-  console.log(process)
   
   if(!process){
-    res.send({friend : friend, msg : "Friend not added"}).status(400)
+    res.send({friend : friend, msg : "Already friends"}).status(400)
   } else {
-    res.send({friend : friend, msg : "Friend added"}).status(200)
+    res.send({friend : friend, msg : "Adding friend..."}).status(200)
   }
   }
 )
@@ -75,10 +78,15 @@ userRouter.post("/get/friends", validateToken, async (req, res) => {
     let values = [username]
     const friends = await RunSQL(query, values);
   
+
+
     column = friends[0].friends;
     column = JSON.parse(column);
+    column = column
+    //{friend : osma, room : "otthotosma"}
+    //column = column.friend;
   
-    res.send({friends : column}).status(200)
+    res.send({allFriends : column}).status(200)
 
 })
 
@@ -92,9 +100,23 @@ userRouter.get("/get/user/:username", validateToken, async (req, res) => {
   let user = await RunSQL(query, values);
   user = user[0];
 
-  console.log(user)
+  //console.log(user)
 
   res.send({user : user})
+})
+
+userRouter.get("/get/friend/:username", validateToken, async (req, res) => {
+
+  let username = req.params.username
+
+  let query = "SELECT * FROM allUsers WHERE username = (?)"
+  let values = [username]
+  let user = await RunSQL(query, values);
+  user = user[0];
+
+  //console.log(user)
+
+  res.render("friends", {username : user.username, email : user.email, fullName : user.name, phone : user.phone})
 })
 
 userRouter.get("/get/all", validateToken, async (req, res) => {

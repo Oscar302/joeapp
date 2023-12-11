@@ -69,24 +69,27 @@ app.use((req, res) => {
 });
 
 //Socket pt. ubrugt skal bruges til chat mellem 2 brugere
-io.on('connection', (socket) => {
-  console.log('A client connected with socket ID:', socket.id, "(Server)");
+io.on('connection', (socket) => {  
+      
+        socket.on('join', (data) => {
+          console.log(data.user, "Joined room", data.room)
+          socket.join(data.room)
 
+          io.to(data.room).emit('joinedRoom', `Writing with: ${data.user}`)
 
-  socket.on("joinRoom", (room) => {
+          socket.on("chatMessage", message => {
+            io.to(data.room).emit("reply", message.message);
+          })
+        })
 
-    socket.join(room) //Join room
-  
-  });
+        socket.on('disconnect', (data) => {
+          socket.leave(data.room)
+        });
 
-  socket.on('chatMessage', (data) => {
-    io.to(data.room).emit('chatMessage', {message: data.message });
-  });
-
-  
+        socket.on("leaveAll", () =>{
+            socket.leaveAll()
+        })
 });
-
-
 
 //Start server
 server.listen(PORT, HOST, () => {
