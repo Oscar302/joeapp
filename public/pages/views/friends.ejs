@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Joe & And The Juice</title>
+    <title> <%= pageTitle%></title>
     <link rel="stylesheet" type="text/css" href="../../style.css" />
     <link rel="stylesheet" type="text/css" href="../../stylesheets/friends.css">
     <link
@@ -32,12 +32,13 @@
                 <%= fullName %>
             </h3>
             <ul>
-                <li> <%= username %> </li>
-                <li> <%= email %> </li>
-                <li> <%= phone %> </li>
+                <li id="username"> <%= username %> </li>
+                <li id="email"> <%= email %> </li>
+                <li id="number"> <%= phone %> </li>
             </ul>
-            <button>Send Offer</button>
-            <button>Send Offer via Text</button>
+            <button id="sendMailButton">Send Offer via Email</button>
+            <button id="sendTextButton">Send Offer via Text</button>
+            <input type="text" placeholder="Text your friends!" id="textInput">
         </div>
     </div>
     <footer>
@@ -46,4 +47,5 @@
     </footer>
   </body>
   <script src="../../script.js"></script>
+  <script src="../../scripts/friend.js"></script>
 </html>

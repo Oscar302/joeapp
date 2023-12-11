@@ -41,9 +41,37 @@
 
 
 #chat-input{
+    width: 80%;
     margin: 10px;
+    height: 30px;
     padding: 10px;
     border: 0px;
+}
+
+#chat-input:hover{
+    box-shadow: 5px 5px 0px 2px black;
+}
+
+#inputContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    height: 15%;
+}
+
+#sendButton{
+    margin: 0px 10px 0px 10px;
+    cursor: pointer;
+    width: 150px;
+    height: 50px;
+    border: 0px;
+    background-color: var(--color-secondary);
+}
+
+#sendButton:hover{
+    box-shadow: 5px 5px 0px 2px black;
 }
 
 #friends-container{
@@ -64,12 +92,18 @@
 }
 
 #friendSearch{
+    padding: 0px;
     text-decoration: none;
     list-style-type: none;
+    max-height: 85;
+    overflow-y: scroll;
+    
 }
 
+
 #friendSearch li{
-    max-width: 100px;
+    font-size: 100%;
+    width: 90%;
     margin: 5px;
     padding: 5px;
     border: 1px solid black;
@@ -86,7 +120,6 @@
     width: 100%;
     border-bottom: 2px solid black;
 }
-
 
 
 #existingFriends{

@@ -61,7 +61,9 @@ function appendSearch(message, container, classname){
     })
 
     messageElement.addEventListener("mouseover", () => {
-        messageElement.textContent = "Add " + message + " as friend";
+        if(message !== 'No users found'){
+            messageElement.textContent = "Add " + message + " as friend";
+        }
     })  
     messageElement.addEventListener("mouseout", () => {
         messageElement.textContent = message;
@@ -140,7 +142,7 @@ addFriendInput.addEventListener("keydown", (event) => {
 
 
 
-console.log(userFriends)
+//console.log(userFriends)
 
 socket.on("connect", async () => {
 

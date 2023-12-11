@@ -1,11 +1,21 @@
-
-
 const button = document.getElementById('signup-button');
 button.addEventListener("click", CreateUser);
 
 async function CreateUser(){
     //henter alle input felter  
     const allInput = document.querySelectorAll('input');
+
+
+    for(let i = 0; i < allInput.length; i++){
+        for(let j = 0; j < allInput[i].value.length; j++){
+            if(allInput[i].value[j] === "æ" || allInput[i].value[j] === "å" || allInput[i].value[j] === "ø" ){
+                Alert("Please do not use æ, ø or å in your input")
+                return
+            }
+        }
+
+    }
+
 
     //laver address object
     let address = {
@@ -25,9 +35,9 @@ async function CreateUser(){
     
 
     const fullName = firstname + " " + lastname;
-    console.log(fullName);
+    //console.log(fullName);
     //address = JSON.stringify(address);
-    
+
 
     if(password === ""){
         Alert("Please enter a password");

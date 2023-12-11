@@ -116,7 +116,7 @@ userRouter.get("/get/friend/:username", validateToken, async (req, res) => {
 
   //console.log(user)
 
-  res.render("friends", {username : user.username, email : user.email, fullName : user.name, phone : user.phone})
+  res.render("friends", {username : user.username, email : user.email, fullName : user.name, phone : user.phone, pageTitle : "Joe & And The Juice"})
 })
 
 userRouter.get("/get/all", validateToken, async (req, res) => {
@@ -157,7 +157,7 @@ userRouter.get('/page/userpage', validateToken, async (req, res) => {
   address = JSON.parse(address);
 
   res.render("user", {username : username, email : email, fullName : name, phone : phone,
-  street : address.street, zip : address.zip, city : address.city, country : address.country})
+  street : address.street, zip : address.zip, city : address.city, country : address.country, pageTitle : "Joe & And The Juice"})
       
 });
 
@@ -191,7 +191,7 @@ userRouter.post('/signup', async (req, res) => {
       res.cookie('access-token', accessToken, {maxAge: 3600000, httpOnly: true});
       res.cookie('username', username, {maxAge: 3600000, httpOnly: false});
       res.cookie('email', email, {maxAge: 3600000, httpOnly: false});
-      res.cookie('fullNake', fullName , {maxAge: 3600000, httpOnly: false});
+      res.cookie('fullName', fullName , {maxAge: 3600000, httpOnly: false});
       res.cookie('phone', phone , {maxAge: 3600000, httpOnly: false});
       res.cookie('address', address , {maxAge: 3600000, httpOnly: false});
 
@@ -212,6 +212,9 @@ userRouter.get("/logout", validateToken, (req, res) => {
   res.clearCookie("username");
   res.clearCookie("email");
   res.clearCookie("id");
+  res.clearCookie("phone");
+  res.clearCookie("address");
+  res.clearCookie("fullName");
 
   res.send({msg : "Logged out", status : 200, dest : "/"})
 })

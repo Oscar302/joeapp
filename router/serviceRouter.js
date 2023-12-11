@@ -6,7 +6,7 @@ const { SendText } = require("../services/sms");
 const bodyParser = require("body-parser");
 
 const products = require("../config/config").products;
-const emailService = require("../services/mail.js");
+//const emailService = require("../services/mail.js");
 serviceRouter.use(bodyParser.json());
 
 //Importerede funktioner
@@ -17,28 +17,33 @@ const { ChatGPTRequest } = require("../services/customerCare.js");
 const { validateToken } = require("../models/tokenGen.js");
 
 
-serviceRouter.post("/mail", (req, res) => {
+serviceRouter.post("/send/mail", async (req, res) => {
   
-    const {address, name, content} = req.body;
+    const {address, receiver, sender} = req.body;
     
     //Mangler at blive sat op ordenligt!
-    mailToUser(address, name, content);
-    
-    res.send("mail sent");
+    const sentMail = await mailToUser(address, sender, receiver);
 
+    //console.log(sentMail)
+    
+    if(!sentMail){
+      res.send({msg : "Mail failed to send!"});
+    } else {
+      res.send({msg : "Mail sent!"});
+    }
 
 });
 
 //Service Routes
-serviceRouter.post("/text", (req, res) => {
-    text = req.body.message;
-    number = req.body.number;
+serviceRouter.post("/send/text", validateToken, (req, res) => {
+    let {sender, receiver, number, text} = req.body;
   
+    //Fjerner mellemrum fra nummer
     number = number.replace(/\s/g, "");
   
-    res.send({ msgSent: number });
+    //res.send({ msgSent: number });
     try {
-      SendText(text, number);
+      SendText(text, number, sender, receiver);
       res.send({ msg: "Message sent", msgSent: text });
     } catch (err) {
       res.send({ msg: "Message failed to send", err: err.message });

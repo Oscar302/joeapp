@@ -45,13 +45,13 @@ Router.get("/signup", (req, res) => {
 
 //EJS, routes
 Router.get("/menu", (req, res) => {
-  res.render("menu", { products: products });
+  res.render("menu", { products: products, pageTitle: "Joe & And The Juice" });
 });
 
 Router.get("/product/:id", (req, res) => {
   const productId = req.params.id - 1;
 
-  res.render("product", { product: products[productId] });
+  res.render("product", { product: products[productId], pageTitle: "Joe & And The Juice" });
 });
 
 

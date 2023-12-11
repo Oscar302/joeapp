@@ -4,8 +4,8 @@ const db = new sqlite3.Database("./db.sqlite");
 
 //const query = "DROP TABLE allUsers"
 
-let query = "UPDATE allUsers SET friends = (?)"
-let values = ["[]"]
+let query = "SELECT * FROM allUsers WHERE username = (?)"
+let values = [];
 
 function RunSQL(query, values){
 
@@ -24,5 +24,6 @@ function RunSQL(query, values){
         })
     })
 }
+
 
 module.exports = {RunSQL}
