@@ -7,14 +7,7 @@ const nodemailer = require("nodemailer");
 const transporter = nodemailer.createTransport({
   service: "Gmail",
   auth: {
-    // Opret en Gmail-konto, for eksempel joejuice2023@gmail.com: https://accounts.google.com/
-    // Brug et random password til Gmail-kontoen, for eksempel joecbs2023
-    // Tilføj to-faktor authentication til Gmail-kontoen via et telefonnummer: https://myaccount.google.com/signinoptions/two-step-verification/enroll-welcome
-    // Opret et app password til Gmail-kontoen: https://myaccount.google.com/apppasswords
-    // Fjern mellemrum i app password og brug det til at sende mails via Gmail SMTP
 
-    // Mikkel har oprettet denne konto, så brug den kun til at afprøve, og ikke spam.... jeg har oprettet denne konto nu
-    // Husk at indsætte modtager email adresser under "to" i funktionen mailToUser
     user: "joeanthejuice2023@gmail.com",
     pass: "wmbyqnoildzvxisw",
   },
