@@ -21,7 +21,7 @@ Router.get("/", (req, res) => {
   res.send(users);
 });
 
-Router.get("/contact", (req, res) => {
+Router.get("/contact", validateToken, (req, res) => {
   res.sendFile(path.join(__dirname, "../public/pages", "contact.html"));
 });
 

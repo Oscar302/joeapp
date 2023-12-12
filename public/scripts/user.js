@@ -1,5 +1,6 @@
 //const socket = io("http://157.245.78.214");
-const socket = io("http://localhost:3000");
+//const socket = io("http://localhost:3000");
+const socket = io("https://dinjoefeature.dk");
 
 //getElementbyId's
 const addFriendInput = document.getElementById("addFriend");

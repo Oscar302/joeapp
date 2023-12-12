@@ -18,14 +18,21 @@ function SendText(text, number, sender, receiver){
       text = "No text given";
     }
     
+    try{
   // sender sms
     client.messages
     .create({
        body: `Hi ${receiver} \n` + text + `\nFrom: ${sender}`,
        from: '+15313313205',
-       to: `´+45${number}`
+       to: `+45${number}`
     }) 
     .then(message => console.log(message.sid))
+    return true
+    } catch(err)
+    {
+      console.log("Error sending sms: ", err)
+      return false
+    }
 
 }
 
