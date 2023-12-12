@@ -1,7 +1,4 @@
 
-// importerer twilio config filen
-const twilioDetail = require('../config/config.js').twilioDetail;
-
 // sætter twilio oplysninger i variabler
 const accountSid = process.env.ACCOUNT_SID;
 const authToken = process.env.AUTH_TOKEN_TWI;
@@ -26,14 +23,13 @@ function SendText(text, number, sender, receiver){
        from: '+15313313205',
        to: `+45${number}`
     }) 
-    .then(message => console.log(message.sid))
+    .then(message => console.log("Sending text", "ID:", message.sid))
     return true
     } catch(err)
     {
       console.log("Error sending sms: ", err)
       return false
     }
-
 }
 
 // eksporterer funktionen så den kan bruges i andre filer

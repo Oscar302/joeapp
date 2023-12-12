@@ -23,6 +23,6 @@
     "socket.io-client": "^4.7.2",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.6",
-    "twilio": "^4.19.0"
+    "twilio": "^4.19.3"
   }
 }
