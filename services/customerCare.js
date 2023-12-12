@@ -1,8 +1,11 @@
 require('dotenv').config();
-const API_KEY = process.env.OPENAI_API_KEY;
+const API_KEY = process.env.API_KEY;
 async function ChatGPTRequest(message){
     
-    console.log("Request started")
+    if(!API_KEY){
+        console.log("No API key found");
+        return 
+    }
 
     let request = await fetch("https://api.openai.com/v1/chat/completions ", {
         method : "POST",
@@ -18,15 +21,15 @@ async function ChatGPTRequest(message){
             }
         ) 
     })
-    .catch(err => console.log(err))
     .then(res => res.json())
+    .catch(err => console.log(err))
     try{reply = request.choices[0].message.content
         console.log(reply);
         return reply
     }
     catch(err){
         console.log(request)
-        if(reply = undefined){
+        if(reply === undefined){
             reply = "Ran into an error..."
         }
     }
