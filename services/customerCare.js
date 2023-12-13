@@ -2,7 +2,6 @@ const ecosystemConfig = require('../ecosystem.config');
 
 require('dotenv').config();
 
-//const API_KEY = process.env.OPEN_AI_KEY
 const API_KEY = ecosystemConfig.apps[0].env.API_KEY;
 async function ChatGPTRequest(message){
     
