@@ -52,7 +52,7 @@ serviceRouter.post("/send/text", validateToken, (req, res) => {
 
   //Chatbot
 serviceRouter.post("/chatbot", async (req, res) => {
-
+ 
     let question = req.body.question;
     let reply = await ChatGPTRequest(question);
   
