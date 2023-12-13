@@ -1,12 +1,17 @@
+const ecosystemConfig = require('../ecosystem.config');
+
 require('dotenv').config();
 
-const API_KEY = process.env.API_KEY;
+//const API_KEY = process.env.OPEN_AI_KEY
+const API_KEY = ecosystemConfig.apps[0].env.API_KEY;
 async function ChatGPTRequest(message){
     
     if(!API_KEY){
         console.log("No API key found");
         return 
     }
+
+    //console.log(API_KEY)
 
     let request = await fetch("https://api.openai.com/v1/chat/completions ", {
         method : "POST",
