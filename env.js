@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 // Count and log the number of environment variables
 const numberOfVariables = Object.keys(process.env).length;
 
