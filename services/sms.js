@@ -1,4 +1,4 @@
-require('dotenv').config('/.env');
+require('dotenv').config();
 // sætter twilio oplysninger i variabler
 const accountSid = process.env.ACCOUNT_SID;
 const authToken = process.env.AUTH_TOKEN_TWI;
