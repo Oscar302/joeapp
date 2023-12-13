@@ -36,7 +36,7 @@ async function ChatGPTRequest(message){
         if(reply === undefined){
             reply = "Ran into an error..."
         }
-        return err
+        return reply
     }
 }
 
