@@ -3,6 +3,7 @@ const ecosystemConfig = require('../ecosystem.config');
 require('dotenv').config();
 
 const API_KEY = ecosystemConfig.apps[0].env.API_KEY;
+
 async function ChatGPTRequest(message){
     
     if(!API_KEY){
@@ -10,6 +11,7 @@ async function ChatGPTRequest(message){
         return 
     }
 
+    let reply = "";
     //console.log(API_KEY)
 
     let request = await fetch("https://api.openai.com/v1/chat/completions ", {
@@ -28,6 +30,7 @@ async function ChatGPTRequest(message){
     })
     .then(res => res.json())
     .catch(err => console.log(err))
+
     try{reply = request.choices[0].message.content
         console.log(reply);
         return reply
