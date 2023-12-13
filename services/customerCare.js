@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 const API_KEY = process.env.API_KEY;
 async function ChatGPTRequest(message){
     
