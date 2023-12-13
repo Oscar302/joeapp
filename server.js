@@ -1,8 +1,8 @@
 // Description: This is the main server file for the application. It will be used to run the server and handle all the requests.
 const express = require("express");
 const app = express();
-const path = require("path");
 
+const path = require("path");
 const bcrypt = require("bcrypt");
 const salt_rounds = 10;
 const cookieParser = require('cookie-parser');
@@ -45,7 +45,6 @@ app.use(express.urlencoded({ extended: true }));
 //Henter db filen
 const sqlite3 = require("sqlite3").verbose();
 const db = new sqlite3.Database("./db.sqlite");
-
 
 //Opens a connection to the database
 db.all("CREATE TABLE IF NOT EXISTS allUsers (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, email TEXT, password TEXT, name TEXT, address TEXT, phone TEXT, friends TEXT)", (err) => {

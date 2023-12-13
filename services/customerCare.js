@@ -34,10 +34,10 @@ async function ChatGPTRequest(message){
         return reply
     }
     catch(err){
-        console.log(request)
         if(reply === undefined){
             reply = "Ran into an error..."
         }
+        return err
     }
 }
 
