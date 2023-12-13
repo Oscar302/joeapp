@@ -28,7 +28,6 @@ function SendText(text, number, sender, receiver){
     } catch(err)
     {
       console.log("Error sending sms: ", err)
-      return false
     }
 }
 
