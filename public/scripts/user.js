@@ -158,10 +158,10 @@ socket.on("connect", async () => {
 
 
         if(document.querySelectorAll("welcomeMessage").length > 0){
-            appendMessage(data, "welcomeMessage", "messages")    
+            appendMessage(data, "welcomeMessage", "welcomeAnnounce")    
         } else {
             document.querySelectorAll(".welcomeMessage").forEach(item => item.remove())
-            appendMessage(data, "welcomeMessage", "messages")
+            appendMessage(data, "welcomeMessage", "welcomeAnnounce")
         }
     })
 
