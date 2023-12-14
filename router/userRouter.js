@@ -20,8 +20,6 @@ userRouter.use(bodyParser.json());
 userRouter.use(bodyParser.urlencoded({ extended: true }));
 userRouter.use(express.static("public"));
 
-
-
 //—––––––––USER MANAGEMENT–––––––––––––––––—–––––––––––––––––––––––––—–––––––––––––––––––––––––—–––––––––––––––––––––––––
 //Hent bruger
 userRouter.post("/login", async (req, res) => {

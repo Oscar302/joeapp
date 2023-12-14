@@ -54,6 +54,7 @@ serviceRouter.post("/send/text", validateToken, (req, res) => {
 serviceRouter.post("/chatbot", async (req, res) => {
  
     let question = req.body.question;
+    console.log("Recieved question", question);
     let reply = await ChatGPTRequest(question);
   
     res.send({reply : reply})
