@@ -9,7 +9,9 @@ async function ChatGPTRequest(message){
         return 
     }
 
-    console.log(API_KEY)
+    if(message = ""){
+        return "No message given"
+    }
 
     let request = await fetch("https://api.openai.com/v1/chat/completions ", {
         method : "POST",
@@ -27,6 +29,8 @@ async function ChatGPTRequest(message){
     })
     .then(res => res.json())
     .catch(err => console.log(err))
+
+    console.log(request);
 
     try{reply = request.choices[0].message.content
         console.log(reply);
