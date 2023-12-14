@@ -26,20 +26,31 @@
         <a id="sign-up" href="/site/user">Sign Up</a>
       </div>
     </header>
-    <div id="page-content">
+     <div id="page-content">
         <div id="friend">
-            <h3>
-                <%= fullName %>
-            </h3>
-            <ul>
-                <li id="username"> <%= username %> </li>
-                <li id="email"> <%= email %> </li>
-                <li id="number"> <%= phone %> </li>
-            </ul>
-            <button id="sendMailButton">Send Offer via Email</button>
-            <button id="sendTextButton">Send Offer via Text</button>
-            <input type="text" placeholder="Text your friends!" id="textInput">
+          <div id="slide">
+            <div id="friend-container">
+              <h3>
+                  <%= fullName %>
+              </h3>
+              <ul id="friend-info-list">
+                  <li id="username">Username:  <%= username %> </li>
+                  <li id="email">Email: <%= email %> </li>
+                  <li id="number">Phone: +45 <%= phone %> </li>
+              </ul>
+            </div>
+            <div id="contact-container">
+              <div id="mail-container">
+                <button id="sendMailButton">Send Offer via Email</button>
+                <input type="text" placeholder="Mail to your friends" id="mailInput">
+              </div>
+              <div id="text-container">
+                <button id="sendTextButton">Send Offer via Text</button>
+                <input type="text" placeholder="Text your friends!" id="textInput">
+              </div>
+            </div>  
         </div>
+      </div>
     </div>
     <footer>
       <p>Facebook</p>

@@ -77,7 +77,7 @@ io.on('connection', (socket) => {
           io.to(data.room).emit('joinedRoom', `Writing with: ${data.user}`)
 
           socket.on("chatMessage", message => {
-            io.to(data.room).emit("reply", message.message);
+            io.to(data.room).emit("reply", message.username + " – " + message.message);
           })
         })
 

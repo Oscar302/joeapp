@@ -181,7 +181,7 @@ socket.on("connect", async () => {
 
         //appendMessage(message, "question", "messages")
     
-        socket.emit("chatMessage", {message : message})
+        socket.emit("chatMessage", {message : message, username : username})
 
         document.getElementById("chat-input").value = "";
     })
