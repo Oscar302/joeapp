@@ -14,5 +14,4 @@ export authToken=abf8956e0b040a230e8621413741aa4d
 
 
 # API-Nøgle til CustomerCare er undladt, da eksponeringen af denne udløser en tilbagetrækkelse af nøglen. 
-API_KEY=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 pm2 restart server.js --update-env
-
+Skulle du have din egen API-nøgle til ChatGPT, så kan du opstille variablen ligesom overstående, men til variablen: API_KEY='key' pm2 restart server.js --update-env
