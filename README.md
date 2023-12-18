@@ -1,7 +1,18 @@
 # joeapp
+For at starte applikationen, bør du opholde dig mappen joeapp. 
 
-Start applicationen ved at tilgå mappen "joeapp", du bør allerede være i den.
-1. Kør kommando i termninal:    node server.js
-Resultatet bør være 'Server is now running on 3000' i konsollen
+### Indsæt af variable Twilio Variable i PM2
+Overstående nøgler skal importeres pm2-miløjet...
 
-Herfra kan du tilgå fra din browser addressen: http://localhost:3000
+Gør det to gange
+ACCOUNT_SID=ACc51e52fb55e9f546269424e7756bdaf9 pm2 restart server.js --update-env
+authToken=abf8956e0b040a230e8621413741aa4d pm2 restart server.js --update-env
+
+### Hvis du ønsker, at køre applikatioen i node i stedet:
+export ACCOUNT_SID=ACc51e52fb55e9f546269424e7756bdaf9
+export authToken=abf8956e0b040a230e8621413741aa4d
+
+
+# API-Nøgle til CustomerCare er undladt, da eksponeringen af denne udløser en tilbagetrækkelse af nøglen. 
+API_KEY=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 pm2 restart server.js --update-env
+

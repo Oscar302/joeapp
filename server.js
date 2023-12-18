@@ -27,7 +27,7 @@ const { serviceRouter } = require("./router/serviceRouter.js");
 const products = require("./config/config").products;
 
 // Sætter port og host
-const PORT = 3000;
+
 const HOST = "127.0.0.1";
 
 //EJS Filer (sider der kan ændre indholdet, alt efter hvad de loades på, f.eks. en profilside eller produktside)
@@ -91,6 +91,7 @@ io.on('connection', (socket) => {
 });
 
 //Start server
+const PORT = 3000;
 server.listen(PORT, HOST, () => {
   console.log(`Starting: Server is now running on port ${PORT}`);
 });
