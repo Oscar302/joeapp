@@ -4,7 +4,6 @@ const path = require("path");
 const bodyParser = require("body-parser");
 
 const { SendText } = require("../services/sms");
-const { HashingMachine } = require("../models/signupHash.js")
 const { HashedInputMatch } = require("../models/signupHash.js")
 const { RunSQL } = require("../config/performSQL.js");
 const {createTokens} = require("../models/tokenGen.js");
@@ -67,6 +66,7 @@ userRouter.post("/add/friend", validateToken, async (req, res) => {
   }
   }
 )
+
 
 userRouter.post("/get/friends", validateToken, async (req, res) => {
   
@@ -137,7 +137,12 @@ userRouter.get("/delete/:username", validateToken, async (req, res) => {
 
     let user = await RunSQL(query, values);
 
-    res.send({user : user})
+    if(user != undefined){
+      res.send({msg : "User deleted", status : 200})
+    } else {
+      res.send({msg : "User not found", status : 400})
+    }
+
 })
 
 userRouter.get('/page/userpage', validateToken, async (req, res) => {

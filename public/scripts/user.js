@@ -141,7 +141,36 @@ addFriendInput.addEventListener("keydown", (event) => {
     } 
 }) 
 
+const deleteButton = document.getElementById("deleteButton");
+deleteButton.addEventListener("click", async () => {
 
+    let data = await fetch(`/user/delete/${username}`, {
+        method : "GET",
+        headers : {
+            "Content-Type" : "application/json"
+        }
+    })
+    .then(res => res.json())
+
+    if(data.status != 200){
+        alert(data.msg)
+        return;
+    }
+
+    if(data.status === 200){
+        let loguout = await fetch("/user/logout", {
+            method : "GET",
+            headers : {
+                "Content-Type" : "application/json"
+            }
+        })
+        .then(res => res.json())
+        alert(loguout.msg)
+        if(loguout.status === 200){
+            window.location.href = "/";
+        }
+    }
+})
 
 //console.log(userFriends)
 
@@ -178,9 +207,7 @@ socket.on("connect", async () => {
         if(message === ""){
             return;
         }
-
-        //appendMessage(message, "question", "messages")
-    
+        
         socket.emit("chatMessage", {message : message, username : username})
 
         document.getElementById("chat-input").value = "";

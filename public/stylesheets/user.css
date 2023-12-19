@@ -190,6 +190,13 @@
     margin-left: 10px;
 }
 
+#deleteButton{
+    width: 150px;
+    height: 25px;
+    background-color: #FFFFFF;
+    cursor: pointer;
+}
+
 /*
 .friend-div
 .friend-div button
