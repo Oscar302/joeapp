@@ -27,10 +27,12 @@ userRouter.post("/login", async (req, res) => {
   
     let query = "SELECT * FROM allUsers WHERE username = (?)"
     let values = [username]
-    let user = await RunSQL(query, values);
-    user = user[0];
+    
+    try{
+      let user = await RunSQL(query, values);
+      user = user[0];
 
-    let match = await HashedInputMatch(user.password, password);
+      let match = await HashedInputMatch(user.password, password);
   
     if(match === true){
     //Create token
@@ -46,8 +48,17 @@ userRouter.post("/login", async (req, res) => {
 
       res.send({msg : "Logging in...", status : 200});
     } else {
-      res.send({msg : "User not found..", status : 400});
+      res.send({msg : "Password incorrect...", status : 400});
     }
+
+    } catch(error){
+      res.send({msg : "User not found..", status : 400});
+      console.log(error, "error")
+      return
+      
+    }
+  
+    
 })
 
 
