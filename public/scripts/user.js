@@ -253,8 +253,9 @@ socket.on("connect", async () => {
                 
 
                 div.addEventListener("click", async () => {
+                    
+                    document.querySelectorAll(".replies").forEach(item => item.remove())
 
-                    await socket.emit("leaveAll")
                     socket.emit("join", {room : friends.allFriends[i].room, user : friends.allFriends[i].friend});
                     
                 })
