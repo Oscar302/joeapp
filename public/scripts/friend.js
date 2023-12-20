@@ -21,12 +21,6 @@ sendTextButton.addEventListener('click', async () => {
 
     let text = false;
 
-    try{
-        text = document.getElementById("textInput").value;
-    }catch(err){
-        
-    }
-
     let friend = document.getElementById("username").innerHTML;
     let number = document.getElementById("number").innerHTML;
     console.log(friend, number, text)
@@ -40,8 +34,8 @@ sendTextButton.addEventListener('click', async () => {
             {
             "sender" : COOKIES.username,
             "number" : number,
-            "receiver" : friend,
-            "text" : text})
+            "receiver" : friend }
+            )
        })
     .then(res => res.json())
     .then(res => console.log(res));

@@ -55,7 +55,6 @@ db.all("CREATE TABLE IF NOT EXISTS allUsers (id INTEGER PRIMARY KEY AUTOINCREMEN
   }
 })
 
-
 //Index page
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html", "signup.html", "login.html"));
@@ -69,6 +68,8 @@ app.use((req, res) => {
 
 //Socket pt. ubrugt skal bruges til chat mellem 2 brugere
 io.on('connection', (socket) => {  
+
+      console.log(socket.id)
       
         socket.on('join', (data) => {
           console.log(data.user, "Joined room", data.room)

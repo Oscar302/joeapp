@@ -36,17 +36,17 @@ serviceRouter.post("/send/mail", async (req, res) => {
 
 //Service Routes
 serviceRouter.post("/send/text", validateToken, (req, res) => {
-    let {sender, receiver, number, text} = req.body;
+    let {sender, receiver, number} = req.body;
   
     //Fjerner mellemrum fra nummer
     number = number.replace(/\s/g, "");
   
     //res.send({ msgSent: number });
     try {
-      SendText(text, number, sender, receiver);
-      res.send({ msg: "Message sent", msgSent: text });
+      SendText(number, sender, receiver);
+      res.status(200).send({ msg: "Message wiht offer sent"});
     } catch (err) {
-      res.send({ msg: "Message failed to send", err: err.message });
+      res.send({ msg: "Failed to sent text", err: err.message });
     }
   });
 
