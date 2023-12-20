@@ -1,4 +1,7 @@
-# joeapp
+### Applikationen kører også, og virker, på https://dinjoefeature.dk
+- Du kan oprette brugere så tosset du vild - og benytte dig af chatbotten
+
+### joeapp
 For at starte applikationen, bør du opholde dig mappen src. 
 
 ### Nedstående variable skal importeres til miljøet:
